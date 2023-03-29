@@ -16,8 +16,6 @@ export interface Message {
 const socket = connect("http://localhost:5000");
 
 function App() {
-  // const socket = useSocket();
-
   const joinChatForm = useForm({ name: "" });
   const chatForm = useForm({ message: "" });
 
