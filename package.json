@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint  --ext .js,.ts",
+    "lint-fix": "eslint . --ext .js,.ts --fix"
   },
   "repository": {
     "type": "git",
@@ -27,7 +29,6 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-only-warn": "^1.0.3",
     "eslint-plugin-prettier": "^4.0.0",
-
     "prettier": "^2.7.1"
   }
 }

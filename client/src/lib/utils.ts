@@ -1,3 +1,2 @@
-export const classNameGenerator = (...classes: (string | undefined)[]) => {
-    return `${classes.filter((el) => el).join(' ')}`;
-  };
+export const classNameGenerator = (...classes: (string | undefined)[]) =>
+  `${classes.filter((el) => el).join(" ")}`;

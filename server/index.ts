@@ -37,7 +37,7 @@ io.on(getEventName("CONNECTION"), (socket: Socket) => {
     });
   });
 
-  socket.on(getEventName("DISCONNECT"), (socket) => {
+  socket.on(getEventName("DISCONNECT"), () => {
     console.log("Client is disconnect", socket.id);
   });
 });

@@ -3,7 +3,6 @@ import { connect } from "socket.io-client";
 
 import InputLabel from "./components/Inputs/InputLabel/InputLabel";
 import useForm from "./hooks/useForm";
-import useSocket from "./hooks/useSocket";
 
 import { getEventName } from "./lib/events";
 
