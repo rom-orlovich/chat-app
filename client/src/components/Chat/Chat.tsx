@@ -3,6 +3,7 @@ import { Socket } from "socket.io-client";
 import { useSessionContext } from "../../context/SessionContext";
 import useAuth from "../../hooks/useAuth";
 import useForm from "../../hooks/useForm";
+import { createMessage } from "../../lib/api/messagesAPI";
 
 import { getEventName } from "../../lib/events";
 import { Message, MessageSent } from "../../lib/types/messages.types";
@@ -28,7 +29,8 @@ function Chat({
       username,
       createdAt: new Date(),
     };
-    socket.emit(getEventName("SEND_MESSAGE"), message);
+    const res = await createMessage(message);
+    console.log(res);
   });
 
   useEffect(() => {

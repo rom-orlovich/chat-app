@@ -5,7 +5,7 @@ import {
   createMessageInDB,
   getMessagesFromDB,
 } from "../../mongoDB/handlers/messages";
-import { GLOBAL_CHAT_ID } from "../../socket/socket";
+import { GLOBAL_CHAT_ID } from "../../socket/lib/handlers";
 
 export const getMessages: RequestHandler = async (req, res) => {
   const messages = await getMessagesFromDB();

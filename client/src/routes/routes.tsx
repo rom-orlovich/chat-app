@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createBrowserRouter } from "react-router-dom";
+import { getMessages } from "../lib/api/messagesAPI";
 import { getAppRoutes } from "../lib/appRoutes";
 import { messagesUrlAPI } from "../lib/endpoints";
 import { Message } from "../lib/types/messages.types";
@@ -17,10 +18,7 @@ export const routes = createBrowserRouter([
       {
         path: getAppRoutes("CHAT"),
         element: <ChatPage />,
-        loader: async () => {
-          const data = await axios.get<Message[]>(messagesUrlAPI());
-          return data.data;
-        },
+        loader: getMessages,
       },
     ],
   },
