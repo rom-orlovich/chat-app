@@ -1,15 +1,13 @@
-
-
-import React, { PropsWithChildren } from 'react';
-import { GenericRecord } from '../../../lib/types';
-import { classNameGenerator } from '../../../lib/utils';
-import { InputLabelProps } from './types';
+import React, { PropsWithChildren } from "react";
+import { GenericRecord } from "../../../lib/types/types";
+import { classNameGenerator } from "../../../lib/utils";
+import { InputLabelProps } from "./types";
 
 export const inputLabelStyle = {
-  label: 'font-medium',
-  inputContainer: 'w-full h-full relative',
+  label: "font-medium",
+  inputContainer: "w-full h-full relative",
   input: `px-[0.5rem] py-[0.3rem] text-[0.8rem] w-full rounded-lg input-custom`,
-  textArea: `px-4 py-2 w-full h-full rounded-lg input-custom`
+  textArea: `px-4 py-2 w-full h-full rounded-lg input-custom`,
 };
 
 /**
@@ -21,7 +19,7 @@ function InputLabel({
   children,
   textProps,
   textAreaProps,
-  IconButtonProps
+  IconButtonProps,
 }: InputLabelProps & PropsWithChildren) {
   let inputContainer: GenericRecord<string> | undefined = {};
   if (inputProps) {
@@ -31,13 +29,19 @@ function InputLabel({
     <textarea
       autoComplete="off"
       {...textAreaProps}
-      className={classNameGenerator(inputLabelStyle.textArea, textAreaProps?.className)}
+      className={classNameGenerator(
+        inputLabelStyle.textArea,
+        textAreaProps?.className
+      )}
     />
   ) : (
     <input
       autoComplete="off"
       {...inputProps}
-      className={classNameGenerator(inputLabelStyle.input, inputProps?.className)}
+      className={classNameGenerator(
+        inputLabelStyle.input,
+        inputProps?.className
+      )}
     />
   );
 
@@ -50,7 +54,10 @@ function InputLabel({
     <>
       <label
         {...labelProps}
-        className={classNameGenerator(inputLabelStyle.label, labelProps?.className)}
+        className={classNameGenerator(
+          inputLabelStyle.label,
+          labelProps?.className
+        )}
       >
         <span {...textProps}>{children} </span>
         <span className={inputLabelStyle.inputContainer} {...inputContainer}>

@@ -4,16 +4,10 @@ import { useSessionContext } from "../../context/SessionContext";
 import useForm from "../../hooks/useForm";
 import useSocket from "../../hooks/useSocket";
 import { getEventName } from "../../lib/events";
+import { Message } from "../../lib/types/messages.types";
 
 import InputLabel from "../Inputs/InputLabel/InputLabel";
 
-export interface Message {
-  messageID: string;
-  // userID:string,
-  name: string;
-  content: string;
-  createdAt: string;
-}
 function Chat({ socket }: { socket: Socket }) {
   const chatForm = useForm({ message: "" });
   const state = useSessionContext();

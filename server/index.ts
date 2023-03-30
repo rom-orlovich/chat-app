@@ -1,46 +1,47 @@
+/* eslint-disable import/first */
+// eslint-disable-next-line import/newline-after-import
 import { config } from "dotenv";
+config();
 import express from "express";
 import http from "http";
-import { Server, Socket } from "socket.io";
+import { Server } from "socket.io";
 import cors from "cors";
 
-import { getEventName } from "./lib/events";
-
-config();
+import { getAppEndpoints } from "./lib/endpoints";
+import { messageRoutes } from "./routes/messages";
+import { socketHandlers } from "./socket/socket";
+import { client } from "./mongoDB/utils";
 
 const PORT = process.env.PORT || 5000;
 
 const app = express();
+
 app.use(cors());
 
 const server = http.createServer(app);
+
 const io = new Server(server, {
   cors: {
     origin: "*",
   },
 });
 
-const GLOBAL_CHAT = "global_chat";
+const startServer = async () => {
+  try {
+    await client.connect();
+    socketHandlers(io);
 
-io.on(getEventName("CONNECTION"), (socket: Socket) => {
-  console.log("Client connect", socket.id);
+    app.use(getAppEndpoints("API_PREFIX"), messageRoutes);
 
-  socket.on(getEventName("JOIN_CHAT"), async (data) => {
-    socket.join(GLOBAL_CHAT);
-    console.log(`User ${data.name} join to chat`);
-  });
-
-  socket.on(getEventName("SEND_MESSAGE"), (data) => {
-    io.to(GLOBAL_CHAT).emit(getEventName("BROADCAST_MESSAGES"), {
-      messageID: String(new Date().getTime()),
-      ...data,
+    server.listen(PORT, () => {
+      console.log(`listening to port ${PORT}`);
     });
-  });
+  } catch (error) {
+    console.log(error);
+    await client.close();
+    io.close();
+    server.close();
+  }
+};
 
-  socket.on(getEventName("DISCONNECT"), () => {
-    console.log("Client is disconnect", socket.id);
-  });
-});
-server.listen(PORT, () => {
-  console.log(`listening to port ${PORT}`);
-});
+startServer();

@@ -1,5 +1,31 @@
 version: "3.8"
 services:
+# MongoDB service
+  mongoDB:
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - "mongodb_db:/data/db"
+
+
+  # MongoDB dashboard service
+  mongo-express:
+    restart: always
+    image: mongo-express
+    environment:
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=admin
+    ports:
+      - "8081:8081"
+    volumes:
+      - "mongodb_db:/data/db"
+    depends_on:
+      - mongoDB
+  
+
+ # Node.js&Express server service
   server:
     build: './server'
     container_name: server
@@ -10,10 +36,13 @@ services:
 
     env_file:
       - ./server/.env
-
     volumes:
       - './server/:/app/server'
+    depends_on:
+      - mongoDB
+      - mongo-express
 
+ # React client service
   client:
     build: './client'
     container_name: client
@@ -29,4 +58,8 @@ services:
     tty: true
     depends_on:
       - server
+
+volumes:
+  mongodb_db:
+       driver: local
     

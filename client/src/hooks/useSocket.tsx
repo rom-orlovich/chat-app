@@ -4,7 +4,7 @@ import { io, Socket } from "socket.io-client";
 function useSocket() {
   const [socket, setSocket] = useState<Socket>(io);
   useEffect(() => {
-    const newSocket = io("http://localhost:5000");
+    const newSocket = io(process.env.REACT_APP_SOCKET_SRL || "");
     setSocket(newSocket);
 
     return () => {

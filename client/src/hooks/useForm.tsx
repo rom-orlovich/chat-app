@@ -1,6 +1,5 @@
-
-import { ChangeEventHandler, FormEventHandler, useState } from 'react';
-import { GenericRecord } from '../lib/types';
+import { ChangeEventHandler, FormEventHandler, useState } from "react";
+import { GenericRecord } from "../lib/types/types";
 
 interface FormState<D> {
   isLoading: boolean;
@@ -20,23 +19,23 @@ function useForm<T extends GenericRecord<any>, D = any>(initialState: T) {
   const [formState, setFromState] = useState<FormState<D>>({
     isLoading: false,
     data: undefined,
-    isSent: false
+    isSent: false,
   });
   // On change handler by input's id.
-  const onChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (e) => {
-    setFormValues((pre) => {
-      return {
-        ...pre,
-        [e.target.id]: e.target.value
-      };
-    });
+  const onChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (
+    e
+  ) => {
+    setFormValues((pre) => ({
+      ...pre,
+      [e.target.id]: e.target.value,
+    }));
   };
 
   function handleSetValue<V>(id: keyof T) {
     return (value: V) => {
       setFormValues((pre) => ({
         ...pre,
-        [id]: value
+        [id]: value,
       }));
     };
   }
@@ -45,46 +44,47 @@ function useForm<T extends GenericRecord<any>, D = any>(initialState: T) {
    * This function return the submit function that execute the callback function that provided to execute during the submit event.
    * During the submit event, the submit function handles the state of the submit event and return an appropriate response.
    */
-  const onSubmit: (cb: (formValue: T) => Promise<D>) => FormEventHandler<HTMLFormElement> =
-    (cb) => async (e) => {
-      e.preventDefault();
-      try {
-        //Initialize a new form submitting.
-        setFromState((pre) => ({
-          ...pre,
-          data: undefined,
-          isLoading: true,
-          isSent: true
-        }));
-        const result = await cb(formValues);
+  const onSubmit: (
+    cb: (formValue: T) => Promise<D>
+  ) => FormEventHandler<HTMLFormElement> = (cb) => async (e) => {
+    e.preventDefault();
+    try {
+      // Initialize a new form submitting.
+      setFromState((pre) => ({
+        ...pre,
+        data: undefined,
+        isLoading: true,
+        isSent: true,
+      }));
+      const result = await cb(formValues);
 
-        //Set the result data.
-        setFromState({
-          data: result,
-          isLoading: false,
-          isSent: false
-        });
-        return result;
-      } catch (error) {
-        const errorObj = error as Error;
-        //Handle any error if it is exist.
-        setFromState({
-          data: undefined,
-          isLoading: false,
-          isSent: false,
-          error: new Error(errorObj.message || 'Something went wrong')
-        });
-      }
-      return formState.error;
-    };
+      // Set the result data.
+      setFromState({
+        data: result,
+        isLoading: false,
+        isSent: false,
+      });
+      return result;
+    } catch (error) {
+      const errorObj = error as Error;
+      // Handle any error if it is exist.
+      setFromState({
+        data: undefined,
+        isLoading: false,
+        isSent: false,
+        error: new Error(errorObj.message || "Something went wrong"),
+      });
+    }
+    return formState.error;
+  };
 
   return {
     setFormValues,
     handleSetValue,
     onSubmit,
-    onChange:onChange,
+    onChange,
     formValues,
-    formState
+    formState,
   };
 }
 
