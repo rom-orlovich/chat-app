@@ -6,6 +6,7 @@ export const ACTIONS_CODE = {
   USER_LOGOUT: "3001",
   USERNAME_EXIST: "3002",
   USERNAME_NOT_EXIST: "3003",
+  USERNAME_NOT_VALID: "3004",
 } as const;
 
 export const getActionCode = (key: keyof typeof ACTIONS_CODE) =>

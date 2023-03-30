@@ -13,14 +13,15 @@ function ChatPage() {
   const data = useLoaderData() as Message[];
   console.log(data);
   const socket = useSocket();
-  const n = useNavigate();
+  const navigate = useNavigate();
   const { handleLogout, username, last } = useAuth();
 
   useEffect(() => {
     if (username) socket.emit(getEventName("JOIN_CHAT"), username);
     else {
+      console.log(last.current);
       socket.emit(getEventName("LEAVE_CHAT"), last.current);
-      n(getAppRoutes("HOME"));
+      navigate(getAppRoutes("HOME"));
     }
   }, [socket, username]);
 

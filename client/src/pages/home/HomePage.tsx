@@ -8,7 +8,7 @@ import useForm from "../../hooks/useForm";
 function HomePage() {
   const joinChatForm = useForm({ name: "" });
 
-  const { handleLogin } = useAuth();
+  const { handleLogin, reason } = useAuth();
   const handleJoinChatSubmit = joinChatForm.onSubmit(() =>
     handleLogin(joinChatForm.formValues.name)
   );
@@ -24,6 +24,7 @@ function HomePage() {
           }}
         />
         <button type="submit"> enter chat</button>
+        {reason && <p>{reason}</p>}
       </form>
     </div>
   );

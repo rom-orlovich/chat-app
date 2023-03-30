@@ -6,6 +6,7 @@ export const ACTIONS_CODE = {
   USER_LOGOUT: "3001",
   USERNAME_EXIST: "3002",
   USERNAME_NOT_EXIST: "3003",
+  USERNAME_NOT_VALID: "3004",
 } as const;
 
 export type ActionCode = typeof ACTIONS_CODE;
@@ -24,6 +25,7 @@ export const ACTIONS_RESPONSE = {
     `The username ${username} has already exist`,
   [getActionCode("USERNAME_NOT_EXIST")]: (username: string) =>
     `The username ${username} is not exist.`,
+  [getActionCode("USERNAME_NOT_VALID")]: "The username is not valid.",
 } as Record<ActionCodeValue, string | ((username: string) => string)>;
 
 export const getActionResponse = (code: keyof typeof ACTIONS_RESPONSE) =>

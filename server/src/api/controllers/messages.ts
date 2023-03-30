@@ -16,7 +16,7 @@ export const getMessages: RequestHandler = async (req, res) => {
 export const createMessage: RequestHandler = async (req, res) => {
   const messageData = req.body;
   const { io } = req;
-  console.log(messageData);
+
   const message = {
     ...messageData,
     chatID: GLOBAL_CHAT_ID,

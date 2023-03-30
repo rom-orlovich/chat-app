@@ -14,7 +14,7 @@ export const socketHandlers = (
       socket,
       loginUsers
     );
-
+    console.log(typeof getEventName("JOIN_CHAT"));
     socket.on(getEventName("JOIN_CHAT"), userJoinChatHandler);
 
     socket.on(getEventName("LEAVE_CHAT"), userLeaveChatHandler);
