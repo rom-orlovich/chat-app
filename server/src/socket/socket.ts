@@ -3,10 +3,17 @@ import { getEventName } from "../lib/events";
 
 import { handlers } from "./lib/handlers";
 
-export const socketHandlers = (io: InstanceType<typeof Server>) => {
+export const socketHandlers = (
+  io: InstanceType<typeof Server>,
+  loginUsers: Set<string>
+) => {
   io.on(getEventName("CONNECTION"), (socket: Socket) => {
     console.log("Client connect", socket.id);
-    const { userJoinChatHandler, userLeaveChatHandler } = handlers(io, socket);
+    const { userJoinChatHandler, userLeaveChatHandler } = handlers(
+      io,
+      socket,
+      loginUsers
+    );
 
     socket.on(getEventName("JOIN_CHAT"), userJoinChatHandler);
 

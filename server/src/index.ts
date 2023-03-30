@@ -11,33 +11,46 @@ import { getAppEndpoints } from "./lib/endpoints";
 
 import { client } from "./mongoDB/utils";
 import { socketHandlers } from "./socket/socket";
-import { addSocketMiddleware } from "./api/middleware";
+import { getRequestExtendMiddleware } from "./api/middleware";
 import { messageRoutes } from "./api/routes/messages";
+import { usersRoutes } from "./api/routes/users";
 
 const PORT = process.env.PORT || 5000;
 
-const app = express();
-
-app.use(cors());
-
-const server = http.createServer(app);
-
-const io = new Server(server, {
-  cors: {
-    origin: "*",
-  },
-});
-
 const startServer = async () => {
+  const app = express();
+  const server = http.createServer(app);
+
+  const io = new Server(server, {
+    cors: {
+      origin: "*",
+    },
+  });
   try {
     await client.connect();
-    socketHandlers(io);
+
+    app.use(cors());
     app.use(express.urlencoded({ extended: true }));
     app.use(express.json());
+
+    const loginUsers = new Set<string>();
+
+    socketHandlers(io, loginUsers);
+
+    const requestExtendMiddleware = getRequestExtendMiddleware(io, loginUsers);
+
+    // Message Routes.
     app.use(
       getAppEndpoints("API_PREFIX"),
-      addSocketMiddleware(io),
+      requestExtendMiddleware,
       messageRoutes
+    );
+
+    // Users Routes.
+    app.use(
+      getAppEndpoints("API_PREFIX"),
+      requestExtendMiddleware,
+      usersRoutes
     );
 
     server.listen(PORT, () => {

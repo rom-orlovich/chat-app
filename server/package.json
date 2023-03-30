@@ -13,7 +13,7 @@
     "typescript": "^5.0.2"
   },
   "scripts": {
-    "start": "npx tsnd --respawn index.ts"
+    "start": "npx tsnd --respawn src/index.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",

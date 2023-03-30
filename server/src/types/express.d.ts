@@ -5,6 +5,7 @@ declare global {
   declare namespace Express {
     export interface Request {
       io: Io;
+      loginUsers: Set<string>;
     }
   }
 }

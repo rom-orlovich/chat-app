@@ -14,7 +14,7 @@ function ChatPage() {
   console.log(data);
   const socket = useSocket();
   const n = useNavigate();
-  const { username, handleLogout, last } = useAuth();
+  const { handleLogout, username, last } = useAuth();
 
   useEffect(() => {
     if (username) socket.emit(getEventName("JOIN_CHAT"), username);

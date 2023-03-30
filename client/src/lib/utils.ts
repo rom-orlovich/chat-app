@@ -10,7 +10,7 @@ export const paramsURL = (params?: GenericRecord<any>) => {
       newParamsURL.set(key, encodeURIComponent(value));
     }
   }
-  return newParamsURL.toString();
+  return newParamsURL;
 };
 
 export const createURL = (...endpoints: string[]) =>
