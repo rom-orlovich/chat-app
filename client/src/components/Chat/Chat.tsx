@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
-import { useSessionContext } from "../../context/SessionContext";
+
 import useAuth from "../../hooks/useAuth";
 import useForm from "../../hooks/useForm";
 import { createMessage } from "../../lib/api/messagesAPI";
 
 import { getEventName } from "../../lib/events";
-import { Message, MessageSent } from "../../lib/types/messages.types";
-import { OmitKey, PickKey } from "../../lib/types/types";
+import { Message, MessageSent } from "../../types/messages.types";
 
 import InputLabel from "../Inputs/InputLabel/InputLabel";
 

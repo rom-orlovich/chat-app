@@ -1,7 +1,6 @@
 import express from "express";
-import { createMessage, getMessages } from "../controllers/messages";
-
 import { getAppEndpoints } from "../../lib/endpoints";
+import { createMessage, getMessages } from "../controllers/messages";
 
 const routes = express.Router();
 routes.get(getAppEndpoints("MESSAGES"), getMessages);

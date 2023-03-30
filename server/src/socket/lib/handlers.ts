@@ -1,7 +1,7 @@
 import { Server } from "http";
 import { Socket } from "socket.io";
-import { getEventName } from "../../lib/events";
 import { Io } from "../../types/express";
+import { getEventName } from "../../lib/events";
 
 export const GLOBAL_CHAT_ID = "global_chat";
 // export const loginUsers = new Set();

@@ -1,5 +1,5 @@
-import { getCollection } from "../../src/mongoDB/utils";
-import { GLOBAL_CHAT_ID } from "../../src/socket/lib/handlers";
+import { GLOBAL_CHAT_ID } from "../../socket/lib/handlers";
+import { getCollection } from "../utils";
 
 export interface Message {
   messageID: string;

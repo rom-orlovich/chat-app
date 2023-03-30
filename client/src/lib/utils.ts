@@ -1,4 +1,4 @@
-import { GenericRecord } from "./types/types";
+import { GenericRecord } from "../types/types";
 
 export const classNameGenerator = (...classes: (string | undefined)[]) =>
   `${classes.filter((el) => el).join(" ")}`;

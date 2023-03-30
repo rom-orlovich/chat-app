@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from "react";
-import { GenericRecord } from "../../../lib/types/types";
+import { GenericRecord } from "../../../types/types";
 import { classNameGenerator } from "../../../lib/utils";
 import { InputLabelProps } from "./types";
 

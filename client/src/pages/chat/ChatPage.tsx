@@ -7,7 +7,7 @@ import useAuth from "../../hooks/useAuth";
 import useSocket from "../../hooks/useSocket";
 import { getAppRoutes } from "../../lib/appRoutes";
 import { getEventName } from "../../lib/events";
-import { Message } from "../../lib/types/messages.types";
+import { Message } from "../../types/messages.types";
 
 function ChatPage() {
   const data = useLoaderData() as Message[];

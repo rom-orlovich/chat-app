@@ -1,5 +1,5 @@
 import { ChangeEventHandler, FormEventHandler, useState } from "react";
-import { AnyFun, GenericRecord } from "../lib/types/types";
+import { AnyFun, GenericRecord } from "../types/types";
 
 interface FormState<D> {
   isLoading: boolean;

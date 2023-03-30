@@ -8,10 +8,11 @@ import { Server } from "socket.io";
 import cors from "cors";
 
 import { getAppEndpoints } from "./lib/endpoints";
-import { messageRoutes } from "./api/routes/messages";
-import { socketHandlers } from "./socket/socket";
+
 import { client } from "./mongoDB/utils";
+import { socketHandlers } from "./socket/socket";
 import { addSocketMiddleware } from "./api/middleware";
+import { messageRoutes } from "./api/routes/messages";
 
 const PORT = process.env.PORT || 5000;
 

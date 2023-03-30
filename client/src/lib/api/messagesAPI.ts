@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getResMessage } from "../actionsCodes";
 import { getAppEndpoints, serverURL } from "../endpoints";
-import { Message, MessageSent } from "../types/messages.types";
+import { Message, MessageSent } from "../../types/messages.types";
 import { createURL } from "../utils";
 
 export const messagesUrlAPI = () =>

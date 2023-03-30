@@ -1,11 +1,12 @@
 import { RequestHandler } from "express";
-import { getActionCode } from "../../src/lib/actionsCodes";
-import { getEventName } from "../../src/lib/events";
+import { getActionCode } from "../../lib/actionsCodes";
+import { getEventName } from "../../lib/events";
 import {
   createMessageInDB,
   getMessagesFromDB,
-} from "../../src/mongoDB/handlers/messages";
-import { GLOBAL_CHAT_ID } from "../../src/socket/lib/handlers";
+} from "../../mongoDB/handlers/messages";
+
+import { GLOBAL_CHAT_ID } from "../../socket/lib/handlers";
 
 export const getMessages: RequestHandler = async (req, res) => {
   const messages = await getMessagesFromDB();
