@@ -35,10 +35,10 @@ function App() {
   //     return setMessages((pre) => [...pre, data]);
   //   };
 
-  //   socket.on(getEventName("BROADCAST_MESSAGES"), handle);
+  //   socket.on(getEventName("BROADCAST_NEW_MESSAGE"), handle);
 
   //   return () => {
-  //     socket.off(getEventName("BROADCAST_MESSAGES"), handle);
+  //     socket.off(getEventName("BROADCAST_NEW_MESSAGE"), handle);
   //   };
   // }, [socket]);
 

@@ -18,6 +18,7 @@ export const getMessagesFromDB = async (chatID = GLOBAL_CHAT_ID) => {
     return [];
   }
 };
+
 export const createMessageInDB = async (message: Message) => {
   const messages = getCollection("messages");
   try {

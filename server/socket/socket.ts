@@ -41,20 +41,20 @@ export const socketHandlers = (io: InstanceType<typeof Server>) => {
       );
     });
 
-    socket.on(getEventName("SEND_MESSAGE"), async (data: Message) => {
-      console.log(data);
-      const message = {
-        ...data,
-        chatID: GLOBAL_CHAT_ID,
-        messageID: String(new Date(data.createdAt).getTime()),
-      };
+    // socket.on(getEventName("SEND_MESSAGE"), async (data: Message) => {
+    //   console.log(data);
+    //   const message = {
+    //     ...data,
+    //     chatID: GLOBAL_CHAT_ID,
+    //     messageID: String(new Date(data.createdAt).getTime()),
+    //   };
 
-      const res = await createMessageInDB(message);
-      if (res) {
-        console.log(res);
-        io.to(GLOBAL_CHAT_ID).emit(getEventName("BROADCAST_MESSAGES"), message);
-      }
-    });
+    //   const res = await createMessageInDB(message);
+    //   if (res) {
+    //     console.log(res);
+    //     io.to(GLOBAL_CHAT_ID).emit(getEventName("BROADCAST_NEW_MESSAGE"), message);
+    //   }
+    // });
 
     socket.on(getEventName("DISCONNECT"), () => {
       console.log("Client is disconnect", socket.id);

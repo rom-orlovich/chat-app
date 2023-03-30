@@ -35,9 +35,9 @@ function Chat({
     const handleSetNewMessage = (data: any) =>
       setMessages((pre) => [...pre, data]);
 
-    socket.on(getEventName("BROADCAST_MESSAGES"), handleSetNewMessage);
+    socket.on(getEventName("BROADCAST_NEW_MESSAGE"), handleSetNewMessage);
     return () => {
-      socket.off(getEventName("BROADCAST_MESSAGES"), handleSetNewMessage);
+      socket.off(getEventName("BROADCAST_NEW_MESSAGE"), handleSetNewMessage);
     };
   }, [socket]);
 
