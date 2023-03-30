@@ -1,4 +1,4 @@
-import { GLOBAL_CHAT_ID } from "../../socket/socket";
+import { GLOBAL_CHAT_ID } from "../../socket/lib/handlers";
 import { getCollection } from "../utils";
 
 export interface Message {

@@ -12,36 +12,6 @@ export const socketHandlers = (io: InstanceType<typeof Server>) => {
 
     socket.on(getEventName("LEAVE_CHAT"), userLeaveChatHandler);
 
-    // socket.on(getEventName("JOIN_CHAT"), async (username) => {
-    //   socket.join(GLOBAL_CHAT_ID);
-    //   console.log(`User ${username} join to chat`);
-    //   loginUsers.add(username);
-    //   console.log(getLoginUsers());
-    //   io.to(GLOBAL_CHAT_ID).emit(
-    //     getEventName("BROADCAST_NEW_CHAT_JOINS"),
-    //     `User ${username} join to chat`
-    //   );
-    //   io.to(GLOBAL_CHAT_ID).emit(
-    //     getEventName("BROADCAST_CURRENT_LOGIN_USERS"),
-    //     getLoginUsers()
-    //   );
-    // });
-
-    // socket.on(getEventName("SEND_MESSAGE"), async (data: Message) => {
-    //   console.log(data);
-    //   const message = {
-    //     ...data,
-    //     chatID: GLOBAL_CHAT_ID,
-    //     messageID: String(new Date(data.createdAt).getTime()),
-    //   };
-
-    //   const res = await createMessageInDB(message);
-    //   if (res) {
-    //     console.log(res);
-    //     io.to(GLOBAL_CHAT_ID).emit(getEventName("BROADCAST_NEW_MESSAGE"), message);
-    //   }
-    // });
-
     socket.on(getEventName("DISCONNECT"), () => {
       console.log("Client is disconnect", socket.id);
     });
