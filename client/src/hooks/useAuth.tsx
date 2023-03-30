@@ -4,16 +4,21 @@ import { getAppRoutes } from "../lib/appRoutes";
 
 function useAuth() {
   const { session, setSession } = useSessionContext();
+
   const navigate = useNavigate();
-  const handleLogin = () => {
-    setSession(session);
+  const handleLogin = (name: string) => {
+    setSession(name);
     navigate(getAppRoutes("CHAT"));
   };
   const handleLogout = () => {
-    setSession("");
     navigate(getAppRoutes("HOME"));
   };
-  return { session, handleLogin, handleLogout, setSession };
+  return {
+    username: session,
+    handleLogin,
+    handleLogout,
+    setUsername: setSession,
+  };
 }
 export type ReturnTypeUseAuth = ReturnType<typeof useAuth>;
 export default useAuth;

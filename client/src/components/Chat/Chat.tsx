@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
 import { useSessionContext } from "../../context/SessionContext";
+import useAuth from "../../hooks/useAuth";
 import useForm from "../../hooks/useForm";
 
 import { getEventName } from "../../lib/events";
@@ -17,14 +18,14 @@ function Chat({
   curMessages: Message[];
 }) {
   const chatForm = useForm({ message: "" });
-  const state = useSessionContext();
+  const { username } = useAuth();
   const [messages, setMessages] = useState<Message[]>(curMessages);
 
   // Submit and send new message.
   const handleChatSubmit = chatForm.onSubmit(async () => {
     const message: MessageSent = {
       content: chatForm.formValues.message,
-      senderName: state.session,
+      username,
       createdAt: new Date(),
     };
     socket.emit(getEventName("SEND_MESSAGE"), message);
@@ -33,6 +34,7 @@ function Chat({
   useEffect(() => {
     const handleSetNewMessage = (data: any) =>
       setMessages((pre) => [...pre, data]);
+
     socket.on(getEventName("BROADCAST_MESSAGES"), handleSetNewMessage);
     return () => {
       socket.off(getEventName("BROADCAST_MESSAGES"), handleSetNewMessage);
@@ -58,7 +60,7 @@ function Chat({
       <ul>
         {messages.map((message) => (
           <li key={message.messageID} className="flex gap-2">
-            <span>{message.senderName} </span>
+            <span>{message.username} </span>
             <span> {message.content} </span>
           </li>
         ))}

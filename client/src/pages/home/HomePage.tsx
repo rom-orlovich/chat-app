@@ -9,7 +9,9 @@ function HomePage() {
   const joinChatForm = useForm({ name: "" });
 
   const { handleLogin } = useAuth();
-  const handleJoinChatSubmit = joinChatForm.onSubmit(handleLogin);
+  const handleJoinChatSubmit = joinChatForm.onSubmit(() =>
+    handleLogin(joinChatForm.formValues.name)
+  );
   return (
     <div className="w-[100vw] h-[100vh] bg-white-500">
       <form onSubmit={handleJoinChatSubmit} className="">

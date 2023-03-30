@@ -4,7 +4,7 @@ import { getCollection } from "../utils";
 export interface Message {
   messageID: string;
   chatID: string;
-  senderName: string;
+  username: string;
   content: string;
   createdAt: string;
 }
