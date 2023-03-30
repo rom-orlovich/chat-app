@@ -2,10 +2,11 @@ import { RequestHandler } from "express";
 import { getActionCode } from "../../lib/actionsCodes";
 
 export const loginUser: RequestHandler = (req, res) => {
-  const username = req.body;
+  const { username } = req.body;
 
   // Check if the username is valid.
-  if (!username) return res.status(400).send(getActionCode("USERNAME_EXIST"));
+  if (!username.trim())
+    return res.status(400).send(getActionCode("USERNAME_NOT_VALID"));
 
   // Check if user has already login.
   if (req.loginUsers.has(username))

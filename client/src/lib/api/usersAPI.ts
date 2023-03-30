@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 import { ActionCodeValue, getActionCode } from "../actionsCodes";
 import { getAppEndpoints, serverURL } from "../endpoints";
@@ -22,8 +22,8 @@ export const login = async (username: string) => {
     );
     return result.data;
   } catch (error) {
-    console.log(error);
-    return getActionCode("USERNAME_EXIST");
+    const err = error as AxiosError;
+    return err.response?.data;
   }
 };
 

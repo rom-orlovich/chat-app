@@ -1,7 +1,11 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSessionContext } from "../context/SessionContext";
-import { getActionCode, getActionResponse } from "../lib/actionsCodes";
+import {
+  ActionCodeValue,
+  getActionCode,
+  getActionResponse,
+} from "../lib/actionsCodes";
 import { login, logout } from "../lib/api/usersAPI";
 import { getAppRoutes } from "../lib/appRoutes";
 
@@ -19,16 +23,17 @@ function useAuth() {
   //   last.current = username;
   //   // navigate(getAppRoutes("HOME"));
   // };
-  const handleLogin = async (name: string) => {
-    const res = await login(name);
+  const handleLogin = async (username: string) => {
+    const res = String(await login(username));
+    console.log(res);
 
-    if (String(res) === getActionCode("USER_LOGIN")) {
-      setSession(name);
+    if (res === getActionCode("USER_LOGIN")) {
+      setSession(username);
       setReason("");
       return navigate(getAppRoutes("CHAT"));
     }
 
-    setReason(getActionResponse(res));
+    setReason(getActionResponse(res as ActionCodeValue));
   };
   const last = useRef("");
 
