@@ -1,7 +1,7 @@
 version: "3.8"
 services:
 # MongoDB service
-  mongoDB:
+  mongo:
     image: mongo
     restart: always
     ports:
@@ -22,7 +22,7 @@ services:
     volumes:
       - "mongodb_db:/data/db"
     depends_on:
-      - mongoDB
+      - mongo
   
 
  # Node.js&Express server service
@@ -39,7 +39,7 @@ services:
     volumes:
       - './server/:/app/server'
     depends_on:
-      - mongoDB
+      - mongo
       - mongo-express
 
  # React client service

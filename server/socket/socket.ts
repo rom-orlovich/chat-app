@@ -19,6 +19,7 @@ export const socketHandlers = (io: InstanceType<typeof Server>) => {
     socket.on(getEventName("SEND_MESSAGE"), async (data: Message) => {
       const message = {
         ...data,
+        chatID: GLOBAL_CHAT_ID,
         messageID: String(new Date().getTime()),
       };
 

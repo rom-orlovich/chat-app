@@ -14,7 +14,11 @@ function ChatPage() {
   useEffect(() => {
     socket.emit(getEventName("JOIN_CHAT"), session);
   }, [socket]);
-  return <div>{<Chat socket={socket} />}</div>;
+  return (
+    <div>
+      <Chat socket={socket} />
+    </div>
+  );
 }
 
 export default ChatPage;
