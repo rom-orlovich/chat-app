@@ -1,5 +1,5 @@
 import { ChangeEventHandler, FormEventHandler, useState } from "react";
-import { GenericRecord } from "../lib/types/types";
+import { AnyFun, GenericRecord } from "../lib/types/types";
 
 interface FormState<D> {
   isLoading: boolean;
@@ -44,39 +44,38 @@ function useForm<T extends GenericRecord<any>, D = any>(initialState: T) {
    * This function return the submit function that execute the callback function that provided to execute during the submit event.
    * During the submit event, the submit function handles the state of the submit event and return an appropriate response.
    */
-  const onSubmit: (
-    cb: (formValue: T) => Promise<D>
-  ) => FormEventHandler<HTMLFormElement> = (cb) => async (e) => {
-    e.preventDefault();
-    try {
-      // Initialize a new form submitting.
-      setFromState((pre) => ({
-        ...pre,
-        data: undefined,
-        isLoading: true,
-        isSent: true,
-      }));
-      const result = await cb(formValues);
+  const onSubmit: (cb: AnyFun) => FormEventHandler<HTMLFormElement> =
+    (cb) => async (e) => {
+      e.preventDefault();
+      try {
+        // Initialize a new form submitting.
+        setFromState((pre) => ({
+          ...pre,
+          data: undefined,
+          isLoading: true,
+          isSent: true,
+        }));
+        const result = await cb(formValues);
 
-      // Set the result data.
-      setFromState({
-        data: result,
-        isLoading: false,
-        isSent: false,
-      });
-      return result;
-    } catch (error) {
-      const errorObj = error as Error;
-      // Handle any error if it is exist.
-      setFromState({
-        data: undefined,
-        isLoading: false,
-        isSent: false,
-        error: new Error(errorObj.message || "Something went wrong"),
-      });
-    }
-    return formState.error;
-  };
+        // Set the result data.
+        setFromState({
+          data: result,
+          isLoading: false,
+          isSent: false,
+        });
+        return result;
+      } catch (error) {
+        const errorObj = error as Error;
+        // Handle any error if it is exist.
+        setFromState({
+          data: undefined,
+          isLoading: false,
+          isSent: false,
+          error: new Error(errorObj.message || "Something went wrong"),
+        });
+      }
+      return formState.error;
+    };
 
   return {
     setFormValues,

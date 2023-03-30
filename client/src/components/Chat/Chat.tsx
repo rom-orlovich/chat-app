@@ -2,31 +2,40 @@ import React, { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
 import { useSessionContext } from "../../context/SessionContext";
 import useForm from "../../hooks/useForm";
-import useSocket from "../../hooks/useSocket";
+
 import { getEventName } from "../../lib/events";
-import { Message } from "../../lib/types/messages.types";
+import { Message, MessageSent } from "../../lib/types/messages.types";
+import { OmitKey, PickKey } from "../../lib/types/types";
 
 import InputLabel from "../Inputs/InputLabel/InputLabel";
 
-function Chat({ socket }: { socket: Socket }) {
+function Chat({
+  socket,
+  curMessages,
+}: {
+  socket: Socket;
+  curMessages: Message[];
+}) {
   const chatForm = useForm({ message: "" });
   const state = useSessionContext();
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>(curMessages);
+
+  // Submit and send new message.
   const handleChatSubmit = chatForm.onSubmit(async () => {
-    socket.emit(getEventName("SEND_MESSAGE"), {
+    const message: MessageSent = {
       content: chatForm.formValues.message,
-      name: "",
+      senderName: state.session,
       createdAt: new Date(),
-    });
+    };
+    socket.emit(getEventName("SEND_MESSAGE"), message);
   });
 
   useEffect(() => {
-    const handle = (data: any) => setMessages((pre) => [...pre, data]);
-
-    socket.on(getEventName("BROADCAST_MESSAGES"), handle);
-
+    const handleSetNewMessage = (data: any) =>
+      setMessages((pre) => [...pre, data]);
+    socket.on(getEventName("BROADCAST_MESSAGES"), handleSetNewMessage);
     return () => {
-      socket.off(getEventName("BROADCAST_MESSAGES"), handle);
+      socket.off(getEventName("BROADCAST_MESSAGES"), handleSetNewMessage);
     };
   }, [socket]);
 
@@ -42,11 +51,16 @@ function Chat({ socket }: { socket: Socket }) {
           }}
         />
 
-        <button type="submit"> send message</button>
+        <button className="bg-green-400" type="submit">
+          send message
+        </button>
       </form>
       <ul>
         {messages.map((message) => (
-          <li key={message.messageID}>{message.content}</li>
+          <li key={message.messageID} className="flex gap-2">
+            <span>{message.senderName} </span>
+            <span> {message.content} </span>
+          </li>
         ))}
       </ul>
     </>

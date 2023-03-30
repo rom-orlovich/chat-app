@@ -6,7 +6,7 @@ export interface Message {
   chatID: string;
   senderName: string;
   content: string;
-  date: Date;
+  createdAt: string;
 }
 export const getMessagesFromDB = async (chatID = GLOBAL_CHAT_ID) => {
   const messages = getCollection("messages");

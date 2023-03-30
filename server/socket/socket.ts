@@ -17,10 +17,11 @@ export const socketHandlers = (io: InstanceType<typeof Server>) => {
     });
 
     socket.on(getEventName("SEND_MESSAGE"), async (data: Message) => {
+      console.log(data);
       const message = {
         ...data,
         chatID: GLOBAL_CHAT_ID,
-        messageID: String(new Date().getTime()),
+        messageID: String(new Date(data.createdAt).getTime()),
       };
 
       const res = await createMessageInDB(message);

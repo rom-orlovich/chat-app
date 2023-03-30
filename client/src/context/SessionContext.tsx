@@ -9,6 +9,7 @@ const context = createContext<ReturnTypeUseStateSession>(
 
 function SessionContext(props: PropsWithChildren) {
   const state = useStateSession({ id: "username", value: "" });
+
   return <context.Provider value={state}>{props.children}</context.Provider>;
 }
 

@@ -1,18 +1,15 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+
 import InputLabel from "../../components/Inputs/InputLabel/InputLabel";
-import { useSessionContext } from "../../context/SessionContext";
+
+import useAuth from "../../hooks/useAuth";
 import useForm from "../../hooks/useForm";
-import { getAppRoutes } from "../../lib/appRoutes";
 
 function HomePage() {
   const joinChatForm = useForm({ name: "" });
-  const navigate = useNavigate();
-  const { session, setSession } = useSessionContext();
-  const handleJoinChatSubmit = joinChatForm.onSubmit(async () => {
-    setSession(joinChatForm.formValues.name);
-    navigate(getAppRoutes("CHAT"));
-  });
+
+  const { handleLogin } = useAuth();
+  const handleJoinChatSubmit = joinChatForm.onSubmit(handleLogin);
   return (
     <div className="w-[100vw] h-[100vh] bg-white-500">
       <form onSubmit={handleJoinChatSubmit} className="">

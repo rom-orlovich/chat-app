@@ -19,7 +19,7 @@ export const routes = createBrowserRouter([
         element: <ChatPage />,
         loader: async () => {
           const data = await axios.get<Message[]>(messagesUrlAPI());
-          return data;
+          return data.data;
         },
       },
     ],
