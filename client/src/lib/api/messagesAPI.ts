@@ -17,6 +17,7 @@ export const getMessages = async () => {
   return data.data;
 };
 export const createMessage = async (message: MessageSent) => {
+  console.log(message);
   try {
     const data = await messagesAPI.post<string>("", message);
     return data;

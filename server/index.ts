@@ -31,7 +31,8 @@ const startServer = async () => {
   try {
     await client.connect();
     socketHandlers(io);
-
+    app.use(express.urlencoded({ extended: true }));
+    app.use(express.json());
     app.use(
       getAppEndpoints("API_PREFIX"),
       addSocketMiddleware(io),
