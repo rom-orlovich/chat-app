@@ -11,6 +11,7 @@ import { getAppEndpoints } from "./lib/endpoints";
 import { messageRoutes } from "./api/routes/messages";
 import { socketHandlers } from "./socket/socket";
 import { client } from "./mongoDB/utils";
+import { addSocketMiddleware } from "./api/middleware";
 
 const PORT = process.env.PORT || 5000;
 
@@ -31,7 +32,11 @@ const startServer = async () => {
     await client.connect();
     socketHandlers(io);
 
-    app.use(getAppEndpoints("API_PREFIX"), messageRoutes);
+    app.use(
+      getAppEndpoints("API_PREFIX"),
+      addSocketMiddleware(io),
+      messageRoutes
+    );
 
     server.listen(PORT, () => {
       console.log(`listening to port ${PORT}`);
