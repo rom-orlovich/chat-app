@@ -21,7 +21,7 @@ function Messages({ messages }: { messages: MessageProps[] }) {
     <Overflow
       active={messages.length > 5}
       innerElementClass="min-h-[15rem] h-fit"
-      outerElementClass="h-[90%]"
+      outerElementClass="h-[90%] mb-2rem"
     >
       <ul className={messagesStyle.messages}>
         {messages.map((message, i) => {

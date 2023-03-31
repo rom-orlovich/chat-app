@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
+import Sidebar from "src/components/Sidebar.ts/Sidebar";
 import Chat from "../../components/Chat/Chat";
 
 import useAuth from "../../hooks/useAuth";
@@ -7,7 +8,6 @@ import useSocket from "../../hooks/useSocket";
 import { getAppRoutes } from "../../lib/appRoutes";
 import { getEventName } from "../../lib/events";
 import { MessageProps } from "../../types/messages.types";
-import Sidebar from "../../components/Sidebar.ts/Sidebar.ts";
 
 const chatPageStyle = {
   pageContainer:

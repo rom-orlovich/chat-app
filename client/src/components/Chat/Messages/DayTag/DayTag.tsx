@@ -1,12 +1,15 @@
 import React from "react";
-import { getDateFromStr, getLocalTimeDate } from "src/lib/utils";
-import { MessageProps } from "src/types/messages.types";
+import { getLocalTimeDate } from "src/lib/utils";
 
 function DayTag({ createdAt }: { createdAt: string }) {
   const createdAtDate = getLocalTimeDate(new Date(createdAt), {
     dateStyle: "long",
   });
-  return <div dir="rtl">{createdAtDate}</div>;
+  return (
+    <li dir="rtl" className="card self-center p-2">
+      {createdAtDate}
+    </li>
+  );
 }
 
 export default DayTag;

@@ -11,7 +11,7 @@ import { createNewMessageFun } from "../utils";
 
 const chatTextInputStyle = {
   container: "flex flex-col ",
-  form: "min-w-[85%] max-w-[90%] self-center",
+  form: "min-w-[100%] max-w-[90%] self-center",
   inputContainer: "",
   label: "block",
   input: "overflow-hidden text-base mb-2",

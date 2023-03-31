@@ -24,7 +24,8 @@ module.exports = {
         // Chat page.
 
         // Login users bar.
-        loginUsersBar: "#2dd4bf",
+        sideBar: "#6ee7b7",
+        itemHover: "#34d399",
         usernameBlock: "white",
 
         // Chat area.

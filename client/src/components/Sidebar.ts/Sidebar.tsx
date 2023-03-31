@@ -2,15 +2,18 @@ import React, { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
 import useAuth from "src/hooks/useAuth";
 import { BoolKey } from "src/types/types";
-
+import { AiOutlineLogout } from "react-icons/ai";
 import { getEventName } from "../../lib/events";
 import { classNameGenerator } from "../../lib/utils";
-import LoginUser from "./LoginUser/LoginUser";
+import LoginUser from "./LoginUsers/LoginUser/LoginUser";
 import Toggle from "../Toggle/Toggle";
 import HamburgerMenu from "./HamburgerMenu/HamburgerMenu";
+import SidebarItemContent from "./SidebarItemContent";
+import ButtonAuth from "./ButtonAuth.tsx/ButtonAuth";
+import LoginUsers from "./LoginUsers/LoginUsers";
 
-const loginUsersStyle = {
-  nav: "fixed  bg-loginUsersBar z-50 top-0 flex h-[100vh] flex-col items-center bg-nav-500 shadow-lg ",
+const sideBarStyle = {
+  nav: "fixed  bg-sideBar z-50 top-0 flex h-[100vh] flex-col items-center bg-nav-500 shadow-lg ",
   isOn: {
     nav: {
       true: "min-w-[14rem]",
@@ -20,12 +23,11 @@ const loginUsersStyle = {
   hoverUser: "hover:bg-nav-600",
   "loginUsers&button-container":
     "flex h-full flex-col justify-between py-4 w-[100%]",
-  loginUsers: "flex flex-col gap-4",
+
   icon: "text-2xl",
 };
 function Sidebar({ socket }: { socket: Socket }) {
   const [loginUsers, setLoginUsers] = useState<string[]>([]);
-  const { handleLogout } = useAuth();
 
   useEffect(() => {
     const handleSetLoginUsers = (data: string[]) => {
@@ -49,27 +51,20 @@ function Sidebar({ socket }: { socket: Socket }) {
       {(toggleProps) => {
         const { isON } = toggleProps;
         const bool = String(isON) as BoolKey;
-        const navIsOn = loginUsersStyle.isOn.nav[bool];
+        const navIsOn = sideBarStyle.isOn.nav[bool];
+
         return (
           <section
             className={classNameGenerator(
-              loginUsersStyle.nav,
+              sideBarStyle.nav,
               navIsOn,
               "duration-500"
             )}
           >
             <HamburgerMenu {...toggleProps} />
-            <div className={loginUsersStyle["loginUsers&button-container"]}>
-              <ul className={loginUsersStyle.loginUsers}>
-                {loginUsers.map((username, i) => (
-                  <LoginUser
-                    username={username}
-                    key={i + username}
-                    isON={isON}
-                  />
-                ))}
-              </ul>
-              <button onClick={handleLogout}> Logout </button>
+            <div className={sideBarStyle["loginUsers&button-container"]}>
+              <LoginUsers isON={isON} loginUsers={loginUsers} />
+              <ButtonAuth isON={isON} />
             </div>
           </section>
         );
