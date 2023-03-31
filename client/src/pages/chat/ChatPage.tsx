@@ -11,7 +11,7 @@ import { Message } from "../../types/messages.types";
 
 function ChatPage() {
   const data = useLoaderData() as Message[];
-  console.log(data);
+
   const socket = useSocket();
   const navigate = useNavigate();
   const { handleLogout, username, last } = useAuth();

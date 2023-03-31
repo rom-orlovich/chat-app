@@ -61,31 +61,3 @@ function useAuth() {
 }
 export type ReturnTypeUseAuth = ReturnType<typeof useAuth>;
 export default useAuth;
-
-/**
- *  
- const handleLogin = async (name: string) => {
-    const res = await login(name);
-    console.log(String(res), getActionCode("USER_LOGIN"));
-    if (String(res) === getActionCode("USER_LOGIN")) {
-      setSession(name);
-      setReason("");
-      return navigate(getAppRoutes("CHAT"));
-    }
-
-    setReason(getActionResponse(res));
-  };
-  const last = useRef("");
-
-  const handleLogout = async () => {
-    last.current = username;
-    const res = await logout(last.current);
-    if (String(res) === getActionCode("USER_LOGOUT")) {
-      setSession("");
-      setReason("");
-      return navigate(getAppRoutes("HOME"));
-    }
-
-    setReason(getActionResponse(res));
-  };
- */

@@ -45,8 +45,6 @@ export const handlers = (io: Io, socket: Socket, loginUsers: Set<string>) => {
 
     // Delete the login user.
     loginUsers.delete(username);
-    console.log("username", username);
-    console.log(getLoginUsers());
 
     // Insert message to db.
     const createdAt = String(new Date().getTime());

@@ -29,7 +29,6 @@ export const login = async (username: string) => {
 
 export const logout = async (username: string) => {
   try {
-    console.log(username);
     const result = await messagesAPI.get<ActionCodeValue>(
       getAppEndpoints("LOGOUT"),
       {
