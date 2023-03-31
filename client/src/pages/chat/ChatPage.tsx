@@ -9,28 +9,37 @@ import { getAppRoutes } from "../../lib/appRoutes";
 import { getEventName } from "../../lib/events";
 import { Message } from "../../types/messages.types";
 
+const chatPageStyle = {
+  pageContainer: "w-[100vw] h-[100vh] bg-chatBackground overflow-hidden",
+};
+
 function ChatPage() {
+  // Load the last messages data from the server.
   const data = useLoaderData() as Message[];
 
+  // Connect to socket.
   const socket = useSocket();
   const navigate = useNavigate();
+
+  // Current login user data
   const { handleLogout, username, last } = useAuth();
 
   useEffect(() => {
+    // If there is valid login username emit join chat socket event.
     if (username) socket.emit(getEventName("JOIN_CHAT"), username);
     else {
-      console.log(last.current);
+      // Otherwise navigate to home page.
       socket.emit(getEventName("LEAVE_CHAT"), last.current);
       navigate(getAppRoutes("HOME"));
     }
   }, [socket, username]);
 
   return (
-    <div>
-      <button onClick={handleLogout}> Logout </button>
+    <section className={chatPageStyle.pageContainer}>
       <Chat socket={socket} curMessages={data} />
       <LoginUsers socket={socket} />
-    </div>
+      <button onClick={handleLogout}> Logout </button>
+    </section>
   );
 }
 

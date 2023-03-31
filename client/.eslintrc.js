@@ -58,5 +58,9 @@ module.exports = {
     ],
     "no-console": ["off"],
     "consistent-return": ["off"],
+    "@typescript-eslint/no-implied-eval": "off",
+    "@typescript-eslint/no-throw-literal": "off",
+    "@typescript-eslint/return-await": "off",
+    "@typescript-eslint/dot-notation": "off",
   },
 };

@@ -55,8 +55,7 @@ function LoginCard() {
         <button className={loginCardStyle.button} type="submit">
           Join Chat
         </button>
-
-        {reason && <p className={loginCardStyle.errorMessage}>*{reason}</p>}
+        {reason && <p className={loginCardStyle.messageError}>*{reason}</p>}
       </form>
     </div>
   );

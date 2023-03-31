@@ -3,7 +3,7 @@ import { getMessages } from "../lib/api/messagesAPI";
 import { getAppRoutes } from "../lib/appRoutes";
 
 import ChatPage from "../pages/chat/ChatPage";
-import HomePage from "../pages/home/HomePage";
+import LobbyPage from "../pages/lobby/LobbyPage";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -12,7 +12,7 @@ export const routes = createBrowserRouter([
     path: getAppRoutes("HOME"),
     element: <ProtectedRoute />,
     children: [
-      { path: "", element: <HomePage /> },
+      { path: "", element: <LobbyPage /> },
       {
         path: getAppRoutes("CHAT"),
         element: <ChatPage />,
