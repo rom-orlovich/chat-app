@@ -3,6 +3,7 @@ import { Io } from "../../types/express";
 import { getEventName } from "../../lib/events";
 import { Message } from "../../../mongoDB/handlers/messages";
 import { createMessageInDB } from "../../mongoDB/handlers/messages";
+import { ACTION_MESSAGE, getActionMessage } from "../../lib/actionsCodes";
 
 export const GLOBAL_CHAT_ID = "global_chat";
 
@@ -14,7 +15,7 @@ export const handlers = (io: Io, socket: Socket, loginUsers: Set<string>) => {
   const userJoinChatHandler = async (username: string) => {
     // Join the socket.
     await socket.join(GLOBAL_CHAT_ID);
-    console.log(`User ${username} join to chat`);
+    console.log(getActionMessage("USER_LOGIN")(username));
 
     // Add the login user.
     loginUsers.add(username);
@@ -25,7 +26,7 @@ export const handlers = (io: Io, socket: Socket, loginUsers: Set<string>) => {
       messageID: createdAt,
       chatID: GLOBAL_CHAT_ID,
       username: "system",
-      content: `User ${username} join to chat`,
+      content: getActionMessage("USER_LOGIN")(username),
       createdAt,
     };
 
@@ -41,7 +42,7 @@ export const handlers = (io: Io, socket: Socket, loginUsers: Set<string>) => {
   const userLeaveChatHandler = async (username: string) => {
     // Leave socket.
     await socket.leave(GLOBAL_CHAT_ID);
-    console.log(`User ${username} left the chat`);
+    console.log(getActionMessage("USER_LOGOUT")(username));
 
     // Delete the login user.
     loginUsers.delete(username);
@@ -52,7 +53,7 @@ export const handlers = (io: Io, socket: Socket, loginUsers: Set<string>) => {
       messageID: createdAt,
       chatID: GLOBAL_CHAT_ID,
       username: "system",
-      content: `User ${username} left the chat`,
+      content: getActionMessage("USER_LOGOUT")(username),
       createdAt,
     };
 

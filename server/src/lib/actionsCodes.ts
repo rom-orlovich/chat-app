@@ -9,5 +9,17 @@ export const ACTIONS_CODE = {
   USERNAME_NOT_VALID: "3004",
 } as const;
 
-export const getActionCode = (key: keyof typeof ACTIONS_CODE) =>
-  ACTIONS_CODE[key];
+type ActionCode = typeof ACTIONS_CODE;
+
+type ActionCodeKey = keyof ActionCode;
+
+export const getActionCode = (key: ActionCodeKey) => ACTIONS_CODE[key];
+
+export const ACTION_MESSAGE = {
+  [getActionCode("USER_LOGIN")]: (username: string) =>
+    `${username} joined the chat`,
+  [getActionCode("USER_LOGOUT")]: (username: string) =>
+    `${username} left the chat`,
+};
+export const getActionMessage = (key: ActionCodeKey) =>
+  ACTION_MESSAGE[getActionCode(key)];
