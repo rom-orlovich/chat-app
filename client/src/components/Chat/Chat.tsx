@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
 
 import { getEventName } from "../../lib/events";
-import { Message } from "../../types/messages.types";
+import { MessageProps } from "../../types/messages.types";
 
-import SendMessage from "./layout/SendMessage/SendMessage";
-import Messages from "./layout/Messages/Messages";
+import Messages from "./Messages/Messages";
+import ChatTextInput from "./ChatTextInput/ChatTextInput";
 
 const chatStyle = {
   container: "flex flex-col justify-between ml-60 mr-2 p-4 h-full",
@@ -17,13 +17,13 @@ function Chat({
   curMessages,
 }: {
   socket: Socket;
-  curMessages: Message[];
+  curMessages: MessageProps[];
 }) {
-  const [messages, setMessages] = useState<Message[]>(curMessages);
+  const [messages, setMessages] = useState<MessageProps[]>(curMessages);
 
   // Update the chat with real time messages.
   useEffect(() => {
-    const handleSetNewMessage = (data: Message) =>
+    const handleSetNewMessage = (data: MessageProps) =>
       setMessages((pre) => [...pre, data]);
 
     socket.on(getEventName("BROADCAST_NEW_MESSAGE"), handleSetNewMessage);
@@ -36,7 +36,7 @@ function Chat({
     <section className={chatStyle.container}>
       <Messages messages={messages} />
 
-      <SendMessage />
+      <ChatTextInput />
     </section>
   );
 }

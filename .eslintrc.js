@@ -6,7 +6,7 @@ module.exports = {
   },
 
   root: true,
-
+  ignorePatterns: ["node_modules/"],
   settings: {
     "import/resolver": {
       node: {

@@ -1,6 +1,6 @@
 import { PickKey } from "./types";
 
-export interface Message {
+export interface MessageProps {
   messageID: string;
   chatID: string;
   username: string;
@@ -8,6 +8,6 @@ export interface Message {
   createdAt: string;
 }
 
-export type MessageSent = PickKey<Message, "content" | "username"> & {
+export type MessageSent = PickKey<MessageProps, "content" | "username"> & {
   createdAt: Date;
 };

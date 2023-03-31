@@ -16,12 +16,15 @@
     "jsx": "preserve",
     "incremental": true,
     "baseUrl": ".",
-    "downlevelIteration": true,
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "downlevelIteration": true
+    // "paths": {
+    //   "@/*": ["./src/*"],
+    //   "@/components/*": ["components/*"],
+    //   "@/pages/*": ["pages/*"],
+    //   "@/styles/*": ["styles/*"]
+    // }
   },
 
-  "include": ["**/*.ts", "**/*.tsx"],
+  // "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

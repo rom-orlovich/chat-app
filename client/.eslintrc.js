@@ -33,8 +33,8 @@ module.exports = {
     "no-unused-expressions": ["warn", { allowShortCircuit: true }],
 
     "import/prefer-default-export": ["off"],
-    "import/extensions": ["warn", "never"],
-    "import/no-unresolved": [2],
+    "import/extensions": ["off"],
+    "import/no-unresolved": ["off"],
     "spaced-comment": ["warn", "always"],
     quotes: ["warn", "double", { allowTemplateLiterals: true }],
     "no-unused-vars": "warn",

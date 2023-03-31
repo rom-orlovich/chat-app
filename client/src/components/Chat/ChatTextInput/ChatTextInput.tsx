@@ -1,29 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-import useForm from "../../../../hooks/useForm";
+import useForm from "../../../hooks/useForm";
 
-import InputLabel from "../../../Inputs/InputLabel/InputLabel";
-import useAuth from "../../../../hooks/useAuth";
-import useAutoSizeTextArea from "../../../../hooks/useAutosizeTextArea";
-import { createNewMessageFun } from "../../utils";
+import InputLabel from "../../Inputs/InputLabel/InputLabel";
+import useAuth from "../../../hooks/useAuth";
+import useAutoSizeTextArea from "../../../hooks/useAutoSizeTextArea";
+import { createNewMessageFun } from "../utils";
 
-const sendMessageStyle = {
+const ChatTextInputStyle = {
   input: "overflow-hidden text-base",
 };
-function SendMessage() {
+function ChatTextInput() {
   const chatForm = useForm({ message: "" });
   const { message: messageValue } = chatForm.formValues;
   const { username } = useAuth();
   const ref = useAutoSizeTextArea(messageValue);
+  const resetMessage = () => chatForm.setFormValues({ message: "" });
 
   // Generate create new message function.
-  const createNewMessage = createNewMessageFun(messageValue.trim(), username);
+  const createNewMessage = createNewMessageFun(
+    messageValue.trim(),
+    username,
+    resetMessage
+  );
 
   // Submit and send new message.
   const handleChatSubmit = chatForm.onSubmit(createNewMessage);
+
   return (
     <div>
-      <form onSubmit={handleChatSubmit}>
+      <form
+        onSubmit={(e) => {
+          handleChatSubmit(e);
+        }}
+      >
         <InputLabel
           textAreaProps={{
             onKeyDown: (e) => {
@@ -33,7 +43,7 @@ function SendMessage() {
             ref,
             id: "message",
             rows: 1,
-            className: sendMessageStyle.input,
+            className: ChatTextInputStyle.input,
             onChange: chatForm.onChange,
             value: chatForm.formValues.message,
             placeholder: "Your message...",
@@ -48,4 +58,4 @@ function SendMessage() {
   );
 }
 
-export default SendMessage;
+export default ChatTextInput;

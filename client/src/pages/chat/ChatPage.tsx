@@ -7,15 +7,16 @@ import useAuth from "../../hooks/useAuth";
 import useSocket from "../../hooks/useSocket";
 import { getAppRoutes } from "../../lib/appRoutes";
 import { getEventName } from "../../lib/events";
-import { Message } from "../../types/messages.types";
+import { MessageProps } from "../../types/messages.types";
 
 const chatPageStyle = {
-  pageContainer: "w-[100vw] h-[100vh] bg-chatBackground overflow-hidden",
+  pageContainer:
+    "w-[100vw] h-[100vh] max-h-[100vh] bg-chatBackground overflow-hidden",
 };
 
 function ChatPage() {
   // Load the last messages data from the server.
-  const data = useLoaderData() as Message[];
+  const data = useLoaderData() as MessageProps[];
 
   // Connect to socket.
   const socket = useSocket();
@@ -38,7 +39,6 @@ function ChatPage() {
     <section className={chatPageStyle.pageContainer}>
       <Chat socket={socket} curMessages={data} />
       <LoginUsers socket={socket} />
-      <button onClick={handleLogout}> Logout </button>
     </section>
   );
 }

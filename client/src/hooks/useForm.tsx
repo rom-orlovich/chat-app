@@ -28,7 +28,7 @@ function useForm<T extends GenericRecord<any>, D = any>(initialState: T) {
   ) => {
     setFormValues((pre) => ({
       ...pre,
-      [e.target.id]: e.target.value.trim(),
+      [e.target.id]: e.target.value,
     }));
   };
 

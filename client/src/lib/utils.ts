@@ -15,3 +15,23 @@ export const paramsURL = (params?: GenericRecord<any>) => {
 
 export const createURL = (...endpoints: string[]) =>
   endpoints.filter((endpoint) => endpoint).join("");
+
+export const classIsOn = (
+  isON: boolean,
+  className: string,
+  classNameElse = ""
+) => (isON ? className : classNameElse);
+
+export const getLocalTimeDate = (
+  date: Date,
+  options?: Intl.DateTimeFormatOptions
+) =>
+  date.toLocaleString("he-IL", {
+    timeZone: "Asia/Jerusalem",
+    // dateStyle: "short",
+
+    timeStyle: "short",
+    ...options,
+  });
+
+export const getDateFromStr = (date: string) => new Date(date);

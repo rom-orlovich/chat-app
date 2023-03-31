@@ -1,15 +1,40 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600&display=swap");
 @layer components {
-    .input-custom {
-      @apply rounded-lg border border-gray-300 bg-white px-2 font-normal focus:border focus:border-blue-300 focus:outline-blue-100;
-    }
-    .button-custom {
-      @apply rounded-lg py-[0.5rem] px-[0.7rem]  text-sm xs:py-[0.5rem] xs:px-[0.8rem]  xs:text-base sm:py-[0.5rem] sm:px-[1rem] sm:text-base;
-    }
-    .card {
-      @apply rounded-lg border-none bg-white shadow-lg;
-    }
+  .input-custom {
+    @apply rounded-lg border border-gray-300 bg-white px-2 font-normal focus:border focus:border-blue-300 focus:outline-blue-100;
   }
+  .button-custom {
+    @apply rounded-lg py-[0.5rem] px-[0.7rem]  text-sm xs:py-[0.5rem] xs:px-[0.8rem]  xs:text-base sm:py-[0.5rem] sm:px-[1rem] sm:text-base;
+  }
+  .card {
+    @apply rounded-lg border-none bg-white shadow-lg;
+  }
+}
+
+/*Scrollbar style*/
+/* width */
+::-webkit-scrollbar {
+  width: 7.5px;
+}
+
+/* Track */
+::-webkit-scrollbar-info {
+  background: #eff3f6;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #3ce8a3;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #35db99;
+}
+.dashboard::-webkit-scrollbar {
+  display: none;
+}

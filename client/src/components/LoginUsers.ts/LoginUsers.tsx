@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
+import useAuth from "src/hooks/useAuth";
 import { getEventName } from "../../lib/events";
 import { classNameGenerator } from "../../lib/utils";
 
 const loginUsersStyle = {
-  nav: "fixed z-50 top-0 flex h-[100vh] flex-col items-center bg-nav-500 shadow-lg ",
+  nav: "fixed  bg-loginUsersBar z-50 top-0 flex h-[100vh] flex-col items-center bg-nav-500 shadow-lg ",
   isOn: {
     nav: {
       true: "min-w-[14rem]",
@@ -18,6 +19,7 @@ const loginUsersStyle = {
 };
 function LoginUsers({ socket }: { socket: Socket }) {
   const [loginUsers, setLoginUsers] = useState<string[]>([]);
+  const { handleLogout, username, last } = useAuth();
   useEffect(() => {
     const handleSetLoginUsers = (data: any) => {
       console.log(data);
@@ -49,6 +51,7 @@ function LoginUsers({ socket }: { socket: Socket }) {
         {loginUsers.map((user, i) => (
           <li key={i + user}>{user}</li>
         ))}
+        <button onClick={handleLogout}> Logout </button>
       </ul>
     </section>
   );

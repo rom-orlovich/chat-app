@@ -8,6 +8,10 @@ module.exports = {
       md: "768px",
       lg: "1200px",
     },
+    fontFamily: {
+      poppins: ["Poppins", "sans-serif"],
+      Roboto: ["Roboto", "sans-serif"],
+    },
     extend: {
       colors: {
         // Lobby page.
@@ -20,15 +24,21 @@ module.exports = {
         // Chat page.
 
         // Login users bar.
-        loginUsersBar: "#8AF29A",
-        usernameBlock: "#FDFDFD",
+        loginUsersBar: "#2dd4bf",
+        usernameBlock: "white",
 
         // Chat area.
-        chatBackground: "#FDFDFD",
+        chatBackground: "#f0fdfa",
         dayTag: "#F2F2F2",
         myMsgBlock: "#AFFFBC",
-        msgBlock: "#DAF6E9",
-        inputMsgBackground: "#FFFAFA",
+        msgBlock: "#d1fae5",
+        sysMsgBlock: "#f1f5f9",
+        username: "#14b8a6",
+        time: "#374151",
+        inputMsgBackground: "#f1f5f9",
+
+        // Scroll bar.
+        scrollBar: "#5FFAD5",
       },
     },
   },

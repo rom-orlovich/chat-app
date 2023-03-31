@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
-import { Message } from "../types/messages.types";
+import { MessageProps } from "../types/messages.types";
 
-function useScrollDown(message: Message[]) {
+function useScrollDown(message: MessageProps[]) {
   const lastMessageRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     // 👇️ scroll to bottom every time messages change
