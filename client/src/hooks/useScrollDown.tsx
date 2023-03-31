@@ -5,7 +5,7 @@ function useScrollDown(message: MessageProps[]) {
   const lastMessageRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     // 👇️ scroll to bottom every time messages change
-    console.log("change");
+
     lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [message]);
 

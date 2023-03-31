@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import Chat from "../../components/Chat/Chat";
-import LoginUsers from "../../components/LoginUsers.ts/LoginUsers";
 
 import useAuth from "../../hooks/useAuth";
 import useSocket from "../../hooks/useSocket";
 import { getAppRoutes } from "../../lib/appRoutes";
 import { getEventName } from "../../lib/events";
 import { MessageProps } from "../../types/messages.types";
+import Sidebar from "../../components/Sidebar.ts/Sidebar.ts";
 
 const chatPageStyle = {
   pageContainer:
@@ -23,7 +23,7 @@ function ChatPage() {
   const navigate = useNavigate();
 
   // Current login user data
-  const { handleLogout, username, last } = useAuth();
+  const { username, last } = useAuth();
 
   useEffect(() => {
     // If there is valid login username emit join chat socket event.
@@ -38,7 +38,7 @@ function ChatPage() {
   return (
     <section className={chatPageStyle.pageContainer}>
       <Chat socket={socket} curMessages={data} />
-      <LoginUsers socket={socket} />
+      <Sidebar socket={socket} />
     </section>
   );
 }
