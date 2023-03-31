@@ -1,7 +1,8 @@
 import React from "react";
-import { Message } from "../../../../types/messages.types";
+
 import Overflow from "../../../Overflow/Overflow";
 import useScrollDown from "../../../../hooks/useScrollDown";
+import Message from "./layout/Message/Message";
 
 const messagesStyle = {
   messages: "",
@@ -16,10 +17,7 @@ function Messages({ messages }: { messages: Message[] }) {
     >
       <ul className={messagesStyle.messages}>
         {messages.map((message) => (
-          <li key={message.messageID} className="flex gap-2">
-            <span>{message.username} </span>
-            <span> {message.content} </span>
-          </li>
+          <Message {...message} />
         ))}
       </ul>
       <div ref={lastMessage}></div>
