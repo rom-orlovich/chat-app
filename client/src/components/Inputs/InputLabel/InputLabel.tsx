@@ -20,6 +20,7 @@ function InputLabel({
   textProps,
   textAreaProps,
   IconButtonProps,
+  wrapperInputLabel,
 }: InputLabelProps & PropsWithChildren) {
   let inputContainer: GenericRecord<string> | undefined = {};
   if (inputProps) {
@@ -59,8 +60,13 @@ function InputLabel({
           labelProps?.className
         )}
       >
-        <span {...textProps}>{children} </span>
-        <span className={inputLabelStyle.inputContainer} {...inputContainer}>
+        {children && <span {...textProps}>{children} </span>}
+        <span
+          className={classNameGenerator(
+            inputLabelStyle.inputContainer,
+            wrapperInputLabel?.className
+          )}
+        >
           {Input}
           {IconButton}
         </span>

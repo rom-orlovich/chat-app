@@ -2,7 +2,7 @@ import React from "react";
 
 import { MessageProps } from "src/types/messages.types";
 import useAuth from "src/hooks/useAuth";
-import { getDateFromStr } from "src/lib/utils";
+
 import Overflow from "../../Overflow/Overflow";
 import useScrollDown from "../../../hooks/useScrollDown";
 
@@ -21,7 +21,7 @@ function Messages({ messages }: { messages: MessageProps[] }) {
     <Overflow
       active={messages.length > 5}
       innerElementClass="min-h-[15rem] h-fit"
-      outerElementClass="h-[95%]"
+      outerElementClass="h-[90%]"
     >
       <ul className={messagesStyle.messages}>
         {messages.map((message, i) => {
