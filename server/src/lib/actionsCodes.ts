@@ -11,7 +11,7 @@ export const ACTIONS_CODE = {
 
 type ActionCode = typeof ACTIONS_CODE;
 
-type ActionCodeKey = keyof ActionCode;
+export type ActionCodeKey = keyof ActionCode;
 
 export const getActionCode = (key: ActionCodeKey) => ACTIONS_CODE[key];
 

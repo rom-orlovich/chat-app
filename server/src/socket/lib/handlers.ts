@@ -1,9 +1,13 @@
 import { Socket } from "socket.io";
 import { Io } from "../../types/express";
 import { getEventName } from "../../lib/events";
-import { Message } from "../../../mongoDB/handlers/messages";
-import { createMessageInDB } from "../../mongoDB/handlers/messages";
-import { ACTION_MESSAGE, getActionMessage } from "../../lib/actionsCodes";
+
+import {
+  MessageToDB,
+  createMessageInDB,
+} from "../../mongoDB/handlers/messages";
+import { getActionMessage } from "../../lib/actionsCodes";
+import { createSysMessageObj } from "./utils";
 
 export const GLOBAL_CHAT_ID = "global_chat";
 
@@ -21,14 +25,8 @@ export const handlers = (io: Io, socket: Socket, loginUsers: Set<string>) => {
     loginUsers.add(username);
 
     // Insert message to db.
-    const createdAt = String(new Date().getTime());
-    const message: Message = {
-      messageID: createdAt,
-      chatID: GLOBAL_CHAT_ID,
-      username: "system",
-      content: getActionMessage("USER_LOGIN")(username),
-      createdAt,
-    };
+
+    const message: MessageToDB = createSysMessageObj("USER_LOGIN", username);
 
     await createMessageInDB(message);
 
@@ -48,14 +46,7 @@ export const handlers = (io: Io, socket: Socket, loginUsers: Set<string>) => {
     loginUsers.delete(username);
 
     // Insert message to db.
-    const createdAt = String(new Date().getTime());
-    const message: Message = {
-      messageID: createdAt,
-      chatID: GLOBAL_CHAT_ID,
-      username: "system",
-      content: getActionMessage("USER_LOGOUT")(username),
-      createdAt,
-    };
+    const message: MessageToDB = createSysMessageObj("USER_LOGOUT", username);
 
     await createMessageInDB(message);
 
