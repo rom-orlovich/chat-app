@@ -9,6 +9,6 @@ const authRouter = express.Router();
 // GET - api/users/login
 routes.get(getAppEndpoints("LOGIN"), loginUser);
 
-authRouter.get(getAppEndpoints("USERS"), routes);
+authRouter.use(getAppEndpoints("USERS"), routes);
 
 export const usersRoutes = authRouter;
