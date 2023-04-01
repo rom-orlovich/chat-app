@@ -25,7 +25,6 @@ export const handlers = (io: Io, socket: Socket, loginUsers: Set<string>) => {
     loginUsers.add(username);
 
     // Insert message to db.
-
     const message: MessageToDB = createSysMessageObj("USER_LOGIN", username);
 
     await createMessageInDB(message);
