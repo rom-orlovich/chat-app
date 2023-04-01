@@ -11,9 +11,9 @@ https://user-images.githubusercontent.com/87934536/229322850-b4c10500-1116-4746-
 
 # Table of contents
 
-- [**App's Architecture**](#app's_architecture)
-- [**Main Flows**](#main_flows)
-- [**Main Features**](#main_features)
+- [**App's Architecture**](#apps-architecture)
+- [**Main Flows**](#main-flows)
+- [**Main Features**](#main-features)
 - [**Technologies**](#technologies)
 - [**Packages**](#packages)
 - [**Installation**](#installation)
