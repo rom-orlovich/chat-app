@@ -8,10 +8,13 @@ const getUsername = (username: string, loginUsers: Map<string, string>) =>
   [...loginUsers.values()].includes(username);
 
 /**
- * Controller for POST - /api/users/login
+ * Controller for GET - /api/users/login
  **/
 export const loginUser: RequestHandler = (req, res) => {
-  const { username } = req.body;
+  const { username } = req.query;
+
+  if (typeof username !== "string")
+    return res.status(400).send(getActionCode("USERNAME_NOT_VALID"));
 
   // Check if the username is valid.
   if (!username.trim())
@@ -29,7 +32,10 @@ export const loginUser: RequestHandler = (req, res) => {
  * Controller for GET - /api/users/logout
  **/
 export const logoutUser: RequestHandler = (req, res) => {
-  const username = String(req.query.username);
+  const { username } = req.query;
+
+  if (typeof username !== "string")
+    return res.status(400).send(getActionCode("USERNAME_NOT_VALID"));
 
   // Check if user hasn't already login.
   if (!getUsername(username, req.loginUsers))

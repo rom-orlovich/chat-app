@@ -6,8 +6,8 @@ const routes = express.Router();
 const authRouter = express.Router();
 
 // Auth routes.
-// POST - api/users/login
-routes.post(getAppEndpoints("LOGIN"), loginUser);
+// GET - api/users/login
+routes.get(getAppEndpoints("LOGIN"), loginUser);
 
 // GET - api/users/logout
 routes.get(getAppEndpoints("LOGOUT"), logoutUser);

@@ -14,11 +14,9 @@ export const messagesAPI = axios.create({ baseURL: usersUrlAPI });
 
 export const login = async (username: string) => {
   try {
-    const result = await messagesAPI.post<ActionCodeValue>(
+    const result = await messagesAPI.get<ActionCodeValue>(
       getAppEndpoints("LOGIN"),
-      {
-        username,
-      }
+      { params: paramsURL({ username }) }
     );
     return result.data;
   } catch (error) {
