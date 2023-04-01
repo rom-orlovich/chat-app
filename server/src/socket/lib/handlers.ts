@@ -40,6 +40,7 @@ export const handlers = (io: Io, socket: Socket, loginUsers: Set<string>) => {
   const userLeaveChatHandler = async (username: string) => {
     // Leave socket.
     await socket.leave(GLOBAL_CHAT_ID);
+    socket.disconnect();
     console.log(getActionMessage("USER_LOGOUT")(username));
 
     // Delete the login user.
