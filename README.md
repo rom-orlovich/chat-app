@@ -26,7 +26,7 @@ This is a real-time chat application that allows users to chat with each other i
 
 ## Main Flows:
 
-   <img alt="User Profile" src="./readme-media/chat-app-architecture.png" width="700" hight="700">
+   <img alt="User Profile" src="./readme-media/chat-app-main-flows.png" width="700" hight="700">
 
 ## Main Features:
 
