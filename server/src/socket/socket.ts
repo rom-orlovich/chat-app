@@ -21,11 +21,11 @@ export const socketHandlers = (
     // Handler for join chat event.
     socket.on(getEventCode("JOIN_CHAT"), userJoinChatHandler);
 
-    // Handler for leave chat event.
-    socket.on(getEventCode("LEAVE_CHAT"), userLeaveChatHandler);
-
     // Handler for user's typing event.
     socket.on(getEventCode("BROADCAST_TYPING"), userTypingHandler);
+
+    // Handler for leave chat event.
+    socket.on(getEventCode("LEAVE_CHAT"), userLeaveChatHandler);
 
     // Handler for Disconnect socket event.
     socket.on(getEventCode("DISCONNECT"), userLeaveChatHandler);

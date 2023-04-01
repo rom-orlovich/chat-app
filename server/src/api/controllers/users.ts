@@ -27,20 +27,3 @@ export const loginUser: RequestHandler = (req, res) => {
   // Response a proper message.
   return res.status(201).send(String(getActionCode("USER_LOGIN")));
 };
-
-/**
- * Controller for GET - /api/users/logout
- **/
-export const logoutUser: RequestHandler = (req, res) => {
-  const { username } = req.query;
-
-  if (typeof username !== "string")
-    return res.status(400).send(getActionCode("USERNAME_NOT_VALID"));
-
-  // Check if user hasn't already login.
-  if (!getUsername(username, req.loginUsers))
-    return res.status(400).send(getActionCode("USERNAME_NOT_EXIST"));
-
-  // Response a proper message.
-  return res.status(200).send(getActionCode("USER_LOGOUT"));
-};

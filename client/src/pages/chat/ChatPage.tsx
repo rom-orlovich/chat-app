@@ -24,14 +24,14 @@ function ChatPage() {
   const navigate = useNavigate();
 
   // Current login user data
-  const { username, lastUsername } = useAuth();
+  const { username } = useAuth();
 
   useEffect(() => {
     // If there is valid login username emit join chat socket event.
     if (username) socket.emit(getEventCode("JOIN_CHAT"), username);
     else {
       // Otherwise navigate to home page.
-      socket.emit(getEventCode("LEAVE_CHAT"), lastUsername.current);
+      socket.emit(getEventCode("LEAVE_CHAT"));
       navigate(getAppRoutes("HOME"));
     }
     return () => {

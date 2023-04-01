@@ -6,7 +6,7 @@ import useAuth from "./useAuth";
 
 function useHandleRooms(socket: Socket) {
   // Current login user data
-  const { username, lastUsername } = useAuth();
+  const { username } = useAuth();
 
   useEffect(() => {
     const joinRoom = async () => {
@@ -14,14 +14,14 @@ function useHandleRooms(socket: Socket) {
       socket.emit(getEventCode("JOIN_CHAT"), username);
     };
 
-    const leaveRoom = async (username: string) => {
+    const leaveRoom = async () => {
       // Emit socket event of leave chat.
-      socket.emit(getEventCode("LEAVE_CHAT"), username);
+      socket.emit(getEventCode("LEAVE_CHAT"));
     };
 
     // If there is valid login username emit join chat socket event.
     if (username) joinRoom();
-    else leaveRoom(lastUsername.current);
+    else leaveRoom();
   }, [username, socket]);
 }
 
