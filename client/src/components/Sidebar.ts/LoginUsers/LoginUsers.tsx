@@ -4,7 +4,7 @@ import useAuth from "src/hooks/useAuth";
 import LoginUser from "./LoginUser/LoginUser";
 
 const loginUsersStyle = {
-  list: "flex flex-col gap-8 items-center mt-[8rem]",
+  list: "flex flex-col gap-8 items-center mt-[4rem]",
 };
 interface LoginUsersProps {
   loginUsers: string[];
@@ -22,8 +22,9 @@ function LoginUsers({ loginUsers, isON }: LoginUsersProps) {
   return (
     <Overflow
       active={loginUsers.length > 2}
-      innerElementClass="h-[95%]"
+      activeClassOuter="overflow-y-scroll"
       outerElementClass="h-[90%] overflow-x-visible"
+      innerElementClass="h-[95%]"
     >
       <ul className={loginUsersStyle.list}>
         {sortedLoginUsers.map((username, i) => (

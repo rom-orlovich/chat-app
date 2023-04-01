@@ -25,8 +25,6 @@ export const createMessage: RequestHandler = async (req, res) => {
 
   const result = await createMessageInDB(message);
 
-  console.log(result);
-
   if (!result)
     return res.status(400).send(getActionCode("MESSAGE_NOT_CREATED"));
 

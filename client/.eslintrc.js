@@ -15,7 +15,7 @@ module.exports = {
   settings: {
     "import/resolver": {
       node: {
-        paths: ["./server", "./client"],
+        paths: ["./client"],
         extensions: [".js", ".ts", ".d.ts", ".tsx"],
       },
     },

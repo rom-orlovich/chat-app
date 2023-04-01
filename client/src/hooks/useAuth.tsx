@@ -43,7 +43,7 @@ function useAuth() {
       alert(message);
       return setError(message);
     }
-    // Clean the current username, clean the error. The navigation to home page exectue in useHandleRooms hook.
+    // Clean the current username, clean the error. The navigation to home page execute in useHandleRooms hook.
     setSession("");
     setError("");
   };

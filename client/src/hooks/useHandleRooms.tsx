@@ -1,8 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Socket } from "socket.io-client";
 
 import { getAppRoutes } from "src/lib/appRoutes";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { createMessage } from "src/lib/api/messagesAPI";
 import { createSysMessageObj } from "src/lib/api/utils";
@@ -14,32 +14,33 @@ function useHandleRooms(socket: Socket) {
   const { username, last } = useAuth();
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const once = useRef(true);
+
   useEffect(() => {
     const joinRoom = async () => {
       // Emit socket event of join chat.
       socket.emit(getEventName("JOIN_CHAT"), username);
-      // Create a message that the user is login.
-      await createMessage(createSysMessageObj("USER_LOGIN", username));
+
       // Navigate
-      return navigate(getAppRoutes("CHAT"));
+      // return navigate(getAppRoutes("CHAT"));
     };
-    const leaveRoom = async () => {
+
+    const leaveRoom = async (username: string) => {
       // Emit socket event of leave chat.
-      socket.emit(getEventName("LEAVE_CHAT"), last.current);
-      // Create a message that the user is logout.
-      await createMessage(createSysMessageObj("USER_LOGOUT", last.current));
-      // Create a message that the user is logout.
-      navigate(getAppRoutes("HOME"));
+      socket.emit(getEventName("LEAVE_CHAT"), username);
+
+      // Navigate
+      // navigate(getAppRoutes("HOME"));
     };
 
     // If there is valid login username emit join chat socket event.
     if (username) joinRoom();
-    else leaveRoom();
-
+    else leaveRoom(last.current);
     return () => {
-      leaveRoom();
+      leaveRoom(username);
     };
-  }, [socket, username]);
+  }, [username, socket]);
 }
 
 export default useHandleRooms;
