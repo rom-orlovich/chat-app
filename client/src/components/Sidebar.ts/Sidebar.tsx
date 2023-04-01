@@ -22,7 +22,7 @@ const sideBarStyle = {
   },
   hoverUser: "hover:bg-nav-600",
   "loginUsers&button-container":
-    "flex h-full flex-col justify-between py-4 w-[100%]",
+    "flex h-full flex-col justify-between py-6 w-[100%]",
 
   icon: "text-2xl",
 };
