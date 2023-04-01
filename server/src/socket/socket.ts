@@ -21,20 +21,6 @@ export const socketHandlers = (
 
     socket.on(getEventName("LEAVE_CHAT"), userLeaveChatHandler);
 
-    socket.on(getEventName("DISCONNECT"), async () => {
-      const username = loginUsers.get(socket.id);
-      loginUsers.delete(socket.id);
-      console.log(`The client:${socket.id} is disconnect`);
-      if (!username) return;
-      await socket.leave(GLOBAL_CHAT_ID);
-      console.log(`The user ${username} left the room`);
-      console.log("current users", loginUsers);
-
-      const message: MessageToDB = createSysMessageObj(
-        "USER_LOGOUT",
-        username || ""
-      );
-      await createMessageByUsingAPI(message);
-    });
+    socket.on(getEventName("DISCONNECT"), userLeaveChatHandler);
   });
 };

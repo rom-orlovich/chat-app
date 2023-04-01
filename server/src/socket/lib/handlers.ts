@@ -38,15 +38,21 @@ export const handlers = (
     }
   };
 
-  const userLeaveChatHandler = async (username: string) => {
+  const userLeaveChatHandler = async () => {
     try {
-      // Leave socket.
-      await socket.leave(GLOBAL_CHAT_ID);
-      socket.disconnect();
-      console.log(getActionMessage("USER_LOGOUT")(username));
+      // Get the user's username.
+      const username = loginUsers.get(socket.id);
+
+      // Check if the user exist.
+      if (!username) return;
 
       // Delete the login user.
       loginUsers.delete(socket.id);
+
+      // Leave socket.
+      await socket.leave(GLOBAL_CHAT_ID);
+
+      console.log(getActionMessage("USER_LOGOUT")(username));
 
       // Insert message to db.
       const message: MessageToDB = createSysMessageObj("USER_LOGOUT", username);
@@ -54,27 +60,41 @@ export const handlers = (
 
       // Update the client about the current login users.
       chat.emit(getEventName("BROADCAST_CURRENT_LOGIN_USERS"), getLoginUsers());
+
+      // Disconnect the socket.
+      socket.disconnect();
+      console.log(`The client:${socket.id} is disconnect`);
     } catch (error) {
       console.log(error);
     }
-
-    // const message: MessageToDB = createSysMessageObj("USER_LOGOUT", username);
-
-    // try {
-    //   const res = await axios.post(
-    //     `${server}${getAppEndpoints("API_PREFIX")}${getAppEndpoints(
-    //       "MESSAGES"
-    //     )}`,
-    //     message
-    //   );
-    // } catch (error) {
-    //   console.log(error);
-    // }
-    // await createMessageInDB(message);
-
-    // // Emit the message to the client.
-    // chat.emit(getEventName("BROADCAST_NEW_MESSAGE"), message);
   };
+  // const disconnectHandler = async () => {
+  //   try {
+  //     // Get the user's username.
+  //     const username = loginUsers.get(socket.id);
+
+  //     // Check if the user exist.
+  //     if (!username) return;
+
+  //     // Delete disconnect username.
+  //     loginUsers.delete(socket.id);
+
+  //     // Leave socket.
+  //     await socket.leave(GLOBAL_CHAT_ID);
+
+  //     console.log(getActionMessage("USER_LOGOUT")(username));
+
+  //     // Insert message to db.
+  //     const message: MessageToDB = createSysMessageObj("USER_LOGOUT", username);
+  //     await createMessageByUsingAPI(message);
+
+  //     // Disconnect the socket.
+  //     socket.disconnect();
+  //     console.log(`The client:${socket.id} is disconnect`);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return { userJoinChatHandler, userLeaveChatHandler };
 };
