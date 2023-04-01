@@ -2,17 +2,17 @@
 
 ## About My Project:
 
-Chat App Assignment is developed as a home assignment for fullstack position at Yad2.
-This is a real-time chat application that allows users to chat with each other in real-time, view the global chat's messages and see the user that currently login.
+Chat App Assignment is developed as a home assignment for a Full-Stack position at Yad2.
+This real-time chat application allows users to chat with each other in real-time, view the global chat's messages, and see the user that is currently logged in.
 
-<video width="700" height="700" controls>
-  <source src="./readme-media/chat_app.mp4" type="video/mp4">
-</video>
+
+https://user-images.githubusercontent.com/87934536/229322850-b4c10500-1116-4746-a06b-74b239586137.mp4
+
 
 # Table of contents
 
-- [**Architecture**](#architecture)
-- [**Main Flows**](#main_flowss)
+- [**App's Architecture**](#app's_architecture)
+- [**Main Flows**](#main_flows)
 - [**Main Features**](#main_features)
 - [**Technologies**](#technologies)
 - [**Packages**](#packages)
@@ -30,14 +30,14 @@ This is a real-time chat application that allows users to chat with each other i
 
 ## Main Features:
 
-1. **Live chat** - The Chat App allows users to engage in a real-time chat conversation with their friends who are currently logged in to the app.
+ 1. **Live chat** - The Chat App allows users to engage in a real-time chat conversation with their friends who are currently logged in to the app.
 
-2. **Users currently logged in** - The app displays a list of all the users who are currently logged in to the app. Users can see who has joined the chat and who has left.
+ 2. **Users currently logged in** - The app displays a list of all the users currently logged in to the app. Users can see who has joined the chat and who has left.
 
-3. **History of messages** - Users can view the history of chat messages that were sent in the chat room and the time each message was sent.
-   If there are two or more messages that were sent on different days, the app will automatically insert a divider with the date on which each message was sent.
+ 3. **History of messages** - Users can view the history of chat messages sent in the chat room and the time each message was sent.
+   If two or more messages were sent on different days, the app would automatically insert a divider with the date each message was sent.
 
-4. **Typing indicator** - Users can see who is currently typing a message in the chat room. This feature is helpful in letting users know that someone is about to send a message and to wait for it.
+ 4. **Typing indicator** - Users can see who is typing a message in the chat room. This feature helps let users know that someone is about to send    a message and to wait for it.
 
 ## Technologies:
 
@@ -45,14 +45,14 @@ This is a real-time chat application that allows users to chat with each other i
 - **[TypeScript](https://www.typescriptlang.org/)** - For type checking and improved developer productivity.
 - **[Node.js](https://nodejs.org/en/)** - For efficient and scalable development of the application's backend logic.
 - **[MongoDB](https://www.mongodb.com/)** - A NoSQL database that stores users' account data.
-- **[Docker](https://www.docker.com/)** - Containerize the app and deploy into Digtal Ocean cloud.
+- **[Docker](https://www.docker.com/)** - Containerize the app to be easy and provide a consistent and reproducible environment for running and deploying applications.
 
 ## Packages:
 
 - **Front-end** :
 
-  - [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework used for styling the application's user interface.
-  - [Socket.IO Client](https://socket.io/) - A client-side library for Socket.IO, which enables real-time bidirectional event-based communication.
+  - [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework for styling the application's user interface.
+  - [Socket.IO Client](https://socket.io/) - A client-side library for Socket.IO enables real-time bidirectional event-based communication.
   - [Axios](https://axios-http.com/docs/intro) - For making API requests to the backend.
   - [React Router](https://www.npmjs.com/package/react-router-dom) - For routes management.
     application's user interface.
@@ -88,10 +88,10 @@ This is a real-time chat application that allows users to chat with each other i
 
 ## What's Next:
 
-- Add user authentication system to the application to ensure that only authorized users can access the chat
+- Add a user authentication system to the application to ensure that only authorized users can access the chat
 - Support chat rooms system so that users can create private chat rooms and invite other users to join
 - Implement a private room feature that allows users to have private conversations with one another
-- Add a filter messages and users data system to the application to allow users to search for specific messages or users.
+- Add a filter messages and user data system to the application to allow users to search for specific messages or users.
 
 ## Images:
 
