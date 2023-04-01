@@ -9,7 +9,6 @@ import useAuth from "../../hooks/useAuth";
 import useSocket from "../../hooks/useSocket";
 
 import { MessageProps } from "../../types/messages.types";
-import useHandleRooms from "../../hooks/useHandleRooms";
 
 const chatPageStyle = {
   pageContainer:
@@ -39,7 +38,6 @@ function ChatPage() {
       socket.emit(getEventCode("LEAVE_CHAT"), username);
     };
   }, [socket, username]);
-  // useHandleRooms(socket);
 
   return (
     <section className={chatPageStyle.pageContainer}>

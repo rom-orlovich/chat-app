@@ -11,4 +11,7 @@ export const EMIT_EVENTS = {
   BROADCAST_TYPING: "1009",
 };
 
+/**
+ * Get socket's event code.
+ */
 export const getEventCode = (key: keyof typeof EMIT_EVENTS) => EMIT_EVENTS[key];

@@ -30,18 +30,24 @@ export const ACTIONS_RESPONSE = {
   [getActionCode("USERNAME_NOT_EXIST")]: (username: string) =>
     `The username ${username} is not exist.`,
   [getActionCode("USERNAME_NOT_VALID")]: "Please insert a valid username.",
-} as Record<ActionCodeValue, string | ((username: string) => string)>;
+};
 
 export type ActionResponseKey = keyof typeof ACTIONS_RESPONSE;
 
 export const getActionResponse = (code: ActionResponseKey) =>
   ACTIONS_RESPONSE[code];
 
+/**
+Create general action message by message's code.
+ */
 export const getActionMessage = (keyCode: ActionCodeKey) => {
   const code = getActionCode(keyCode);
   return getActionResponse(code);
 };
 
+/**
+ * Create action message by message code and username for events that relates to user's auth action.
+ */
 export const getActionMessageOfAuthEvent = (
   keyCode: ActionResponseKey,
   username: string
