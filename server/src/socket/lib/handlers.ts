@@ -19,6 +19,7 @@ export const handlers = (io: Io, socket: Socket, loginUsers: Set<string>) => {
   const userJoinChatHandler = async (username: string) => {
     // Join the socket.
     await socket.join(GLOBAL_CHAT_ID);
+
     console.log(getActionMessage("USER_LOGIN")(username));
 
     // Add the login user.
@@ -26,12 +27,12 @@ export const handlers = (io: Io, socket: Socket, loginUsers: Set<string>) => {
 
     // Insert message to db.
 
-    const message: MessageToDB = createSysMessageObj("USER_LOGIN", username);
+    // const message: MessageToDB = createSysMessageObj("USER_LOGIN", username);
 
-    await createMessageInDB(message);
+    // await createMessageInDB(message);
 
-    // Emit the message to the client.
-    chat.emit(getEventName("BROADCAST_NEW_MESSAGE"), message);
+    // // Emit the message to the client.
+    // chat.emit(getEventName("BROADCAST_NEW_MESSAGE"), message);
 
     // Update the client about the current login users.
     chat.emit(getEventName("BROADCAST_CURRENT_LOGIN_USERS"), getLoginUsers());
@@ -47,12 +48,12 @@ export const handlers = (io: Io, socket: Socket, loginUsers: Set<string>) => {
     loginUsers.delete(username);
 
     // Insert message to db.
-    const message: MessageToDB = createSysMessageObj("USER_LOGOUT", username);
+    // const message: MessageToDB = createSysMessageObj("USER_LOGOUT", username);
 
-    await createMessageInDB(message);
+    // await createMessageInDB(message);
 
-    // Emit the message to the client.
-    chat.emit(getEventName("BROADCAST_NEW_MESSAGE"), message);
+    // // Emit the message to the client.
+    // chat.emit(getEventName("BROADCAST_NEW_MESSAGE"), message);
 
     // Update the client about the current login users.
     chat.emit(getEventName("BROADCAST_CURRENT_LOGIN_USERS"), getLoginUsers());
