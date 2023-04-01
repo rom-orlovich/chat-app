@@ -2,12 +2,8 @@ import axios from "axios";
 import { ActionCodeKey, getActionMessage } from "../../lib/actionsCodes";
 import { MessageToDB } from "../../mongoDB/handlers/messages";
 
-import {
-  SERVER_URL_API,
-  createURL,
-  getAppEndpoints,
-} from "../../lib/endpoints";
-import { GLOBAL_CHAT_ID } from "../../lib/constants";
+import { createURL, getAppEndpoints } from "../../lib/endpoints";
+import { GLOBAL_CHAT_ID, SERVER_URL_API } from "../../lib/constants";
 
 /**
  * Create system message object.
@@ -38,7 +34,7 @@ export const createSystemMessage = (
 export const createMessageByUsingAPI = async (message: MessageToDB) => {
   const url = createURL(SERVER_URL_API, getAppEndpoints("MESSAGES"));
   try {
-    const res = await axios.post(url, message);
+    await axios.post(url, message);
   } catch (error) {
     console.log(error);
   }

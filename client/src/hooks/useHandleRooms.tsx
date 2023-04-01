@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { createMessage } from "src/lib/api/messagesAPI";
 import { createSysMessageObj } from "src/lib/api/utils";
-import { getEventName } from "src/lib/events";
+import { getEventCode } from "src/lib/events";
 import useAuth from "./useAuth";
 
 function useHandleRooms(socket: Socket) {
@@ -20,7 +20,7 @@ function useHandleRooms(socket: Socket) {
   useEffect(() => {
     const joinRoom = async () => {
       // Emit socket event of join chat.
-      socket.emit(getEventName("JOIN_CHAT"), username);
+      socket.emit(getEventCode("JOIN_CHAT"), username);
 
       // Navigate
       // return navigate(getAppRoutes("CHAT"));
@@ -28,7 +28,7 @@ function useHandleRooms(socket: Socket) {
 
     const leaveRoom = async (username: string) => {
       // Emit socket event of leave chat.
-      socket.emit(getEventName("LEAVE_CHAT"), username);
+      socket.emit(getEventCode("LEAVE_CHAT"), username);
 
       // Navigate
       // navigate(getAppRoutes("HOME"));

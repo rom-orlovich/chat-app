@@ -3,7 +3,7 @@ import React, { KeyboardEventHandler } from "react";
 import { BsSend } from "react-icons/bs";
 
 import { Socket } from "socket.io-client";
-import { getEventName } from "src/lib/events";
+import { getEventCode } from "src/lib/events";
 import { useDebouncedCallback } from "use-debounce";
 import useForm from "../../../hooks/useForm";
 
@@ -46,7 +46,7 @@ function ChatTextInput({ socket }: { socket: Socket }) {
 
   const handleTyping = useDebouncedCallback(() => {
     // Broadcast typing event for all the users.
-    socket.emit(getEventName("BROADCAST_TYPING"), username);
+    socket.emit(getEventCode("BROADCAST_TYPING"), username);
   }, 200);
 
   const handleKeyDown: KeyboardEventHandler<HTMLTextAreaElement> = (e) => {

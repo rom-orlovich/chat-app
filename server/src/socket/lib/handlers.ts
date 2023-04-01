@@ -1,7 +1,7 @@
 import { Socket } from "socket.io";
 
 import { Io } from "../../types/express";
-import { getEventName } from "../../lib/events";
+import { getEventCode } from "../../lib/events";
 
 import { MessageToDB } from "../../mongoDB/handlers/messages";
 import { getActionMessage } from "../../lib/actionsCodes";
@@ -38,7 +38,7 @@ export const handlers = (
       await createMessageByUsingAPI(message);
 
       // Update the client about the current login users.
-      chat.emit(getEventName("BROADCAST_CURRENT_LOGIN_USERS"), getLoginUsers());
+      chat.emit(getEventCode("BROADCAST_CURRENT_LOGIN_USERS"), getLoginUsers());
     } catch (error) {
       console.log(error);
     }
@@ -68,7 +68,7 @@ export const handlers = (
       await createMessageByUsingAPI(message);
 
       // Update the client about the current login users.
-      chat.emit(getEventName("BROADCAST_CURRENT_LOGIN_USERS"), getLoginUsers());
+      chat.emit(getEventCode("BROADCAST_CURRENT_LOGIN_USERS"), getLoginUsers());
 
       // Disconnect the socket.
       socket.disconnect();
@@ -91,7 +91,7 @@ export const handlers = (
     socket.broadcast
       .to(GLOBAL_CHAT_ID)
       .emit(
-        getEventName("BROADCAST_TYPING"),
+        getEventCode("BROADCAST_TYPING"),
         getActionMessage("USER_TYPING")(username)
       );
   };

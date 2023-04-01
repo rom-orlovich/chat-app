@@ -2,7 +2,12 @@ import express from "express";
 import { getAppEndpoints } from "../../lib/endpoints";
 import { createMessage, getMessages } from "../controllers/messages";
 
-const routes = express.Router();
-routes.get(getAppEndpoints("MESSAGES"), getMessages);
-routes.post(getAppEndpoints("MESSAGES"), createMessage);
-export const messageRoutes = routes;
+// Messages routes.
+const router = express.Router();
+
+router
+  .route(getAppEndpoints("MESSAGES"))
+  .get(getMessages) // GET - api/messages.
+  .post(createMessage); // POST - api/messages.
+
+export const messageRoutes = router;

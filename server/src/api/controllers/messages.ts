@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 import { getActionCode } from "../../lib/actionsCodes";
-import { getEventName } from "../../lib/events";
+import { getEventCode } from "../../lib/events";
 import {
   createMessageInDB,
   getMessagesFromDB,
@@ -37,7 +37,7 @@ export const createMessage: RequestHandler = async (req, res) => {
     return res.status(400).send(getActionCode("MESSAGE_NOT_CREATED"));
 
   // Brodcast that message to sockets clients.
-  io.to(GLOBAL_CHAT_ID).emit(getEventName("BROADCAST_NEW_MESSAGE"), message);
+  io.to(GLOBAL_CHAT_ID).emit(getEventCode("BROADCAST_NEW_MESSAGE"), message);
 
   // Response a proper message.
   return res.status(201).send(getActionCode("MESSAGE_CREATED"));

@@ -11,4 +11,4 @@ export const EMIT_EVENTS = {
   BROADCAST_TYPING: "1009",
 };
 
-export const getEventName = (key: keyof typeof EMIT_EVENTS) => EMIT_EVENTS[key];
+export const getEventCode = (key: keyof typeof EMIT_EVENTS) => EMIT_EVENTS[key];

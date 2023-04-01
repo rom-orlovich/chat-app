@@ -11,9 +11,10 @@ import { getAppEndpoints } from "./lib/endpoints";
 
 import { client } from "./mongoDB/utils";
 import { socketHandlers } from "./socket/socket";
-import { getRequestExtendMiddleware } from "./api/middleware";
+import { getRequestExtendMiddleware } from "./api/middleware/middleware";
 import { messageRoutes } from "./api/routes/messages";
 import { usersRoutes } from "./api/routes/users";
+import { apiRoutes } from "./api/api";
 
 const PORT = process.env.PORT || 5000;
 
@@ -29,29 +30,37 @@ const startServer = async () => {
   try {
     await client.connect();
 
+    // Middleware
     app.use(cors());
     app.use(express.urlencoded({ extended: true }));
     app.use(express.json());
 
     const loginUsers = new Map<string, string>();
 
+    // Socket Handlers.
     socketHandlers(io, loginUsers);
 
+    // Get the ExtendedMiddleware
     const requestExtendMiddleware = getRequestExtendMiddleware(io, loginUsers);
 
-    // Message Routes.
-    app.use(
-      getAppEndpoints("API_PREFIX"),
-      requestExtendMiddleware,
-      messageRoutes
-    );
+    // Api handlers
+    app.use(getAppEndpoints("API_PREFIX"), requestExtendMiddleware, apiRoutes);
 
-    // Users Routes.
-    app.use(
-      getAppEndpoints("API_PREFIX"),
-      requestExtendMiddleware,
-      usersRoutes
-    );
+    // const api = app.router;
+
+    // // Message Routes.
+    // app.use(
+    //   getAppEndpoints("API_PREFIX"),
+    //   requestExtendMiddleware,
+    //   messageRoutes
+    // );
+
+    // // Users Routes.
+    // app.use(
+    //   getAppEndpoints("API_PREFIX"),
+    //   requestExtendMiddleware,
+    //   usersRoutes
+    // );
 
     server.listen(PORT, () => {
       console.log(`listening to port ${PORT}`);

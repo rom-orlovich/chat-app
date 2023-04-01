@@ -3,12 +3,15 @@ import { getAppEndpoints } from "../../lib/endpoints";
 import { loginUser, logoutUser } from "../controllers/users";
 
 const routes = express.Router();
-const authRoutes = express.Router();
+const authRouter = express.Router();
 
-// Auth routes
-authRoutes.post(getAppEndpoints("LOGIN"), loginUser);
-authRoutes.get(getAppEndpoints("LOGOUT"), logoutUser);
+// Auth routes.
+// POST - api/users/login
+routes.post(getAppEndpoints("LOGIN"), loginUser);
 
-routes.use(getAppEndpoints("USERS"), authRoutes);
+// GET - api/users/logout
+routes.get(getAppEndpoints("LOGOUT"), logoutUser);
 
-export const usersRoutes = routes;
+authRouter.use(getAppEndpoints("USERS"), routes);
+
+export const usersRoutes = authRouter;

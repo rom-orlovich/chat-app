@@ -11,9 +11,7 @@ export const ACTIONS_CODE = {
 } as const;
 
 type ActionCode = typeof ACTIONS_CODE;
-
 export type ActionCodeKey = keyof ActionCode;
-
 export const getActionCode = (key: ActionCodeKey) => ACTIONS_CODE[key];
 
 export const ACTION_MESSAGE = {
@@ -24,5 +22,9 @@ export const ACTION_MESSAGE = {
   [getActionCode("USER_TYPING")]: (username: string) =>
     `${username} is currently typing`,
 };
+
+/**
+ * Get the message for actions the execute in the server.
+ */
 export const getActionMessage = (key: ActionCodeKey) =>
   ACTION_MESSAGE[getActionCode(key)];

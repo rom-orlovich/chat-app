@@ -3,7 +3,7 @@ import { Socket } from "socket.io-client";
 
 import { BoolKey } from "src/types/types";
 
-import { getEventName } from "../../lib/events";
+import { getEventCode } from "../../lib/events";
 import { classNameGenerator } from "../../lib/utils";
 
 import Toggle from "../Toggle/Toggle";
@@ -35,12 +35,12 @@ function Sidebar({ socket }: { socket: Socket }) {
     };
 
     socket.on(
-      getEventName("BROADCAST_CURRENT_LOGIN_USERS"),
+      getEventCode("BROADCAST_CURRENT_LOGIN_USERS"),
       handleSetLoginUsers
     );
     return () => {
       socket.off(
-        getEventName("BROADCAST_CURRENT_LOGIN_USERS"),
+        getEventCode("BROADCAST_CURRENT_LOGIN_USERS"),
         handleSetLoginUsers
       );
     };

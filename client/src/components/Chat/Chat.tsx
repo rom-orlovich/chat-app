@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
 
-import { getEventName } from "../../lib/events";
+import { getEventCode } from "../../lib/events";
 import { MessageProps } from "../../types/messages.types";
 
 import Messages from "./Messages/Messages";
@@ -44,14 +44,14 @@ function Chat({
     };
 
     // Handle the broadcast of new messages.
-    socket.on(getEventName("BROADCAST_NEW_MESSAGE"), handleSetNewMessage);
+    socket.on(getEventCode("BROADCAST_NEW_MESSAGE"), handleSetNewMessage);
 
     // Handle the broadcast of user typing.
-    socket.on(getEventName("BROADCAST_TYPING"), handleTyping);
+    socket.on(getEventCode("BROADCAST_TYPING"), handleTyping);
     return () => {
       // Trun off the socket's events handlers.
-      socket.off(getEventName("BROADCAST_NEW_MESSAGE"), handleSetNewMessage);
-      socket.off(getEventName("BROADCAST_TYPING"), handleTyping);
+      socket.off(getEventCode("BROADCAST_NEW_MESSAGE"), handleSetNewMessage);
+      socket.off(getEventCode("BROADCAST_TYPING"), handleTyping);
     };
   }, [socket]);
 
