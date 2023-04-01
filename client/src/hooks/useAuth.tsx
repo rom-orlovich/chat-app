@@ -1,51 +1,51 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getAppRoutes } from "src/lib/appRoutes";
 import { useSessionContext } from "../context/SessionContext";
 import {
-  ActionCodeValue,
+  getActionMessageOfAuthEvent,
   getActionCode,
-  getActionResponse,
 } from "../lib/actionsCodes";
 import { login, logout } from "../lib/api/usersAPI";
-import { getAppRoutes } from "../lib/appRoutes";
 
 function useAuth() {
   const { session: username, setSession } = useSessionContext();
   const [error, setError] = useState<string>("");
   const navigate = useNavigate();
-  // const handleLogin = (name: string) => {
-  //   setSession(name);
-  //   navigate(getAppRoutes("CHAT"));
-  // };
-  // const last = useRef("");
-  // const handleLogout = () => {
-  //   setSession("");
-  //   last.current = username;
-  //   // navigate(getAppRoutes("HOME"));
-  // };
-  const handleLogin = async (username: string) => {
-    const res = String(await login(username));
-    console.log(res);
-
-    if (res === getActionCode("USER_LOGIN")) {
-      setSession(username);
-      setError("");
-      return navigate(getAppRoutes("CHAT"));
-    }
-
-    setError(getActionResponse(res as ActionCodeValue));
-  };
   const last = useRef("");
 
+  // Handle login.
+  const handleLogin = async (username: string) => {
+    const res = await login(username);
+    const actionCode = String(res);
+
+    // If the action code is not for user login so set error.
+    if (actionCode !== getActionCode("USER_LOGIN")) {
+      const message = getActionMessageOfAuthEvent(res, username);
+      alert(message);
+      return setError(message);
+    }
+
+    // Set the current username, clean the error and navigate to chat page.
+    setSession(username);
+    setError("");
+    return navigate(getAppRoutes("CHAT"));
+  };
+
+  // Handle Logout.
   const handleLogout = async () => {
     last.current = username;
     const res = await logout(last.current);
-    if (String(res) === getActionCode("USER_LOGOUT")) {
-      setSession("");
-      setError("");
+    const actionCode = String(res);
+    // If the action code is not for user logout so set error.
+    if (actionCode !== getActionCode("USER_LOGOUT")) {
+      const message = getActionMessageOfAuthEvent(res, username);
+      alert(message);
+      return setError(message);
     }
-
-    setError(getActionResponse(res));
+    // Clean the current username, clean the error. The navigation to home page exectue in useHandleRooms hook.
+    setSession("");
+    setError("");
   };
 
   return {

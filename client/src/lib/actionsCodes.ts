@@ -1,3 +1,5 @@
+import { ExtractKey } from "src/types/types";
+
 export const ACTIONS_CODE = {
   MESSAGE_CREATED: "2000",
   MESSAGE_NOT_CREATED: "2001",
@@ -19,8 +21,10 @@ export const ACTIONS_RESPONSE = {
   [getActionCode("MESSAGE_CREATED")]: "Message was created successfully!",
   [getActionCode("MESSAGE_NOT_CREATED")]: "Message wasn't created!",
   [getActionCode("MESSAGES_FOUND")]: "Messages were found successfully",
-  [getActionCode("USER_LOGIN")]: "The user was logged in successfully!",
-  [getActionCode("USER_LOGOUT")]: "The user was logged out successfully!",
+  [getActionCode("USER_LOGIN")]: (username: string) =>
+    `${username} joined the chat`,
+  [getActionCode("USER_LOGOUT")]: (username: string) =>
+    `${username} left the chat`,
   [getActionCode("USERNAME_EXIST")]: (username: string) =>
     `The username ${username} has already exist`,
   [getActionCode("USERNAME_NOT_EXIST")]: (username: string) =>
@@ -28,12 +32,23 @@ export const ACTIONS_RESPONSE = {
   [getActionCode("USERNAME_NOT_VALID")]: "Please insert a valid username.",
 } as Record<ActionCodeValue, string | ((username: string) => string)>;
 
-export const getActionResponse = (code: keyof typeof ACTIONS_RESPONSE) =>
+export type ActionResponseKey = keyof typeof ACTIONS_RESPONSE;
+
+export const getActionResponse = (code: ActionResponseKey) =>
   ACTIONS_RESPONSE[code];
 
 export const getActionMessage = (keyCode: ActionCodeKey) => {
   const code = getActionCode(keyCode);
-  return {
-    message: getActionResponse(code),
-  };
+  return getActionResponse(code);
+};
+
+export const getActionMessageOfAuthEvent = (
+  keyCode: ActionResponseKey,
+  username: string
+) => {
+  const messageRes = getActionResponse(keyCode);
+
+  const message =
+    typeof messageRes === "function" ? messageRes(username) : messageRes;
+  return message;
 };

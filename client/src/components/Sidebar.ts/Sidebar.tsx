@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
-import useAuth from "src/hooks/useAuth";
+
 import { BoolKey } from "src/types/types";
-import { AiOutlineLogout } from "react-icons/ai";
+
 import { getEventName } from "../../lib/events";
 import { classNameGenerator } from "../../lib/utils";
-import LoginUser from "./LoginUsers/LoginUser/LoginUser";
+
 import Toggle from "../Toggle/Toggle";
 import HamburgerMenu from "./HamburgerMenu/HamburgerMenu";
-import SidebarItemContent from "./SidebarItemContent";
+
 import ButtonAuth from "./ButtonAuth.tsx/ButtonAuth";
 import LoginUsers from "./LoginUsers/LoginUsers";
 
