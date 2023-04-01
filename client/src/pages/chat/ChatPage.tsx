@@ -1,13 +1,15 @@
-import { useEffect } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import Sidebar from "src/components/Sidebar.ts/Sidebar";
+import { getEventName } from "src/lib/events";
+import { useEffect } from "react";
+import { getAppRoutes } from "src/lib/appRoutes";
 import Chat from "../../components/Chat/Chat";
 
 import useAuth from "../../hooks/useAuth";
 import useSocket from "../../hooks/useSocket";
-import { getAppRoutes } from "../../lib/appRoutes";
-import { getEventName } from "../../lib/events";
+
 import { MessageProps } from "../../types/messages.types";
+import useHandleRooms from "../../hooks/useHandleRooms";
 
 const chatPageStyle = {
   pageContainer:
@@ -37,6 +39,7 @@ function ChatPage() {
       socket.emit(getEventName("LEAVE_CHAT"), username);
     };
   }, [socket, username]);
+  // useHandleRooms(socket);
 
   return (
     <section className={chatPageStyle.pageContainer}>

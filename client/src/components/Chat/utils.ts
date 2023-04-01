@@ -12,7 +12,7 @@ export const createNewMessageFun =
       username,
       createdAt: new Date(),
     };
-    const res = await createMessage(message);
+    await createMessage(message);
     resetMessage();
   };
 

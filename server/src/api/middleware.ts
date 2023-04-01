@@ -3,7 +3,7 @@ import { Io } from "../types/express";
 
 export const getRequestExtendMiddleware: (
   io: Io,
-  loginUsers: Set<string>
+  loginUsers: Map<string, string>
 ) => RequestHandler = (io, loginUsers) => (req, res, next) => {
   req.io = io;
 

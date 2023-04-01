@@ -23,7 +23,7 @@ export const login = async (username: string) => {
     return result.data;
   } catch (error) {
     const err = error as AxiosError;
-    return err.response?.data;
+    return err.response?.data as ActionCodeValue;
   }
 };
 
@@ -37,7 +37,7 @@ export const logout = async (username: string) => {
     );
     return result.data;
   } catch (error) {
-    console.log(error);
-    return getActionCode("USERNAME_NOT_EXIST");
+    const err = error as AxiosError;
+    return err.response?.data as ActionCodeValue;
   }
 };

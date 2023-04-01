@@ -24,9 +24,11 @@ export const createMessage: RequestHandler = async (req, res) => {
   };
 
   const result = await createMessageInDB(message);
+
   if (!result)
     return res.status(400).send(getActionCode("MESSAGE_NOT_CREATED"));
 
   io.to(GLOBAL_CHAT_ID).emit(getEventName("BROADCAST_NEW_MESSAGE"), message);
+
   return res.status(201).send(getActionCode("MESSAGE_CREATED"));
 };

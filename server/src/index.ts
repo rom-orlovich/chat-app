@@ -33,7 +33,7 @@ const startServer = async () => {
     app.use(express.urlencoded({ extended: true }));
     app.use(express.json());
 
-    const loginUsers = new Set<string>();
+    const loginUsers = new Map<string, string>();
 
     socketHandlers(io, loginUsers);
 

@@ -6,10 +6,6 @@ function useSocket() {
   useEffect(() => {
     const newSocket = io(process.env.REACT_APP_SERVER_URL || "");
     setSocket(newSocket);
-
-    return () => {
-      // newSocket.disconnect();
-    };
   }, []);
   return socket;
 }

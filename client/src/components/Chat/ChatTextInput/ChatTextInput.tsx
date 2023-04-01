@@ -1,7 +1,7 @@
 import React, { KeyboardEventHandler } from "react";
 
-import { BsSend, BsSendFill } from "react-icons/bs";
-import { type } from "os";
+import { BsSend } from "react-icons/bs";
+
 import useForm from "../../../hooks/useForm";
 
 import InputLabel from "../../Inputs/InputLabel/InputLabel";
