@@ -33,7 +33,5 @@ export const getActionResponse = (code: keyof typeof ACTIONS_RESPONSE) =>
 
 export const getActionMessage = (keyCode: ActionCodeKey) => {
   const code = getActionCode(keyCode);
-  return {
-    message: getActionResponse(code),
-  };
+  return getActionResponse(code);
 };
