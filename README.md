@@ -30,14 +30,14 @@ This is a real-time chat application that allows users to chat with each other i
 
 ## Main Features:
 
-- **Live chat** - The Chat App allows users to engage in a real-time chat conversation with their friends who are currently logged in to the app.
+1. **Live chat** - The Chat App allows users to engage in a real-time chat conversation with their friends who are currently logged in to the app.
 
-- **Users currently logged in** - The app displays a list of all the users who are currently logged in to the app. Users can see who has joined the chat and who has left.
+2. **Users currently logged in** - The app displays a list of all the users who are currently logged in to the app. Users can see who has joined the chat and who has left.
 
-- **History of messages** - Users can view the history of chat messages that were sent in the chat room and the time each message was sent.
-  If there are two or more messages that were sent on different days, the app will automatically insert a divider with the date on which each message was sent.
+3. **History of messages** - Users can view the history of chat messages that were sent in the chat room and the time each message was sent.
+   If there are two or more messages that were sent on different days, the app will automatically insert a divider with the date on which each message was sent.
 
-- **Typing indicator** - Users can see who is currently typing a message in the chat room. This feature is helpful in letting users know that someone is about to send a message and to wait for it.
+4. **Typing indicator** - Users can see who is currently typing a message in the chat room. This feature is helpful in letting users know that someone is about to send a message and to wait for it.
 
 ## Technologies:
 
