@@ -10,6 +10,7 @@ import ChatTextInput from "./ChatTextInput/ChatTextInput";
 const chatStyle = {
   container:
     "flex flex-col justify-between xs:ml-[12%] ml-[10%]  xs:p-6 p-4 pb-2 xs:max-w-[80%] h-full",
+  typing: "mb-4 pl-4",
   inputMsg: "overflow-hidden text-base",
 };
 
@@ -58,7 +59,7 @@ function Chat({
   return (
     <section className={chatStyle.container}>
       <Messages messages={messages} />
-      {typing && <p>{typing}</p>}
+      {typing && <p className={chatStyle.typing}>{typing}</p>}
       <ChatTextInput socket={socket} />
     </section>
   );
