@@ -2,8 +2,9 @@
 
 ## About My Project:
 
-Chat App Assignment is developed as a home assignment for a Full-Stack position at Yad2.
-This real-time chat application allows users to chat with each other in real-time, view the global chat's messages, and see the user that is currently logged in.
+Chat App Assignment is developed as a home assignment for a Full-Stack position at Yad2. \
+This real-time chat application allows users to chat with each other in real-time, view the global chat's messages, and see the user that is currently logged in. \
+With its user-friendly interface and responsive design, this chat app provides a seamless and enjoyable chat experience for its users.
 
 
 https://user-images.githubusercontent.com/87934536/229322850-b4c10500-1116-4746-a06b-74b239586137.mp4
