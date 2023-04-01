@@ -1,21 +1,12 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { Socket } from "socket.io-client";
 
-import { getAppRoutes } from "src/lib/appRoutes";
-import { useLocation, useNavigate } from "react-router-dom";
-
-import { createMessage } from "src/lib/api/messagesAPI";
-import { createSysMessageObj } from "src/lib/api/utils";
 import { getEventCode } from "src/lib/events";
 import useAuth from "./useAuth";
 
 function useHandleRooms(socket: Socket) {
   // Current login user data
-  const { username, last } = useAuth();
-
-  const navigate = useNavigate();
-  const location = useLocation();
-  const once = useRef(true);
+  const { username, lastUsername } = useAuth();
 
   useEffect(() => {
     const joinRoom = async () => {
@@ -30,7 +21,7 @@ function useHandleRooms(socket: Socket) {
 
     // If there is valid login username emit join chat socket event.
     if (username) joinRoom();
-    else leaveRoom(last.current);
+    else leaveRoom(lastUsername.current);
   }, [username, socket]);
 }
 

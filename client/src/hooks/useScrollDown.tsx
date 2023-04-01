@@ -2,6 +2,9 @@ import { useEffect, useRef } from "react";
 import { delayFun } from "src/lib/utils";
 import { MessageProps } from "../types/messages.types";
 
+/**
+ * Scroll down to the last message ref.
+ */
 function useScrollDown(messages: MessageProps[]) {
   const lastMessageRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {

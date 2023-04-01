@@ -8,11 +8,14 @@ import {
 } from "../lib/actionsCodes";
 import { login, logout } from "../lib/api/usersAPI";
 
+/**
+ * Manage the session state of the user.
+ */
 function useAuth() {
   const { session: username, setSession } = useSessionContext();
   const [error, setError] = useState<string>("");
   const navigate = useNavigate();
-  const last = useRef("");
+  const lastUsername = useRef("");
 
   // Handle login.
   const handleLogin = async (username: string) => {
@@ -34,8 +37,9 @@ function useAuth() {
 
   // Handle Logout.
   const handleLogout = async () => {
-    last.current = username;
-    const res = await logout(last.current);
+    // // Keep the last username before logout in order to left the socket room by the current username.
+    lastUsername.current = username;
+    const res = await logout(lastUsername.current);
     const actionCode = String(res);
     // If the action code is not for user logout so set error.
     if (actionCode !== getActionCode("USER_LOGOUT")) {
@@ -43,6 +47,7 @@ function useAuth() {
       alert(message);
       return setError(message);
     }
+
     // Clean the current username, clean the error. The navigation to home page execute  and navigate to chat page.
     setSession("");
     setError("");
@@ -55,7 +60,7 @@ function useAuth() {
     handleLogout,
     setUsername: setSession,
     error,
-    last,
+    lastUsername,
   };
 }
 export type ReturnTypeUseAuth = ReturnType<typeof useAuth>;
