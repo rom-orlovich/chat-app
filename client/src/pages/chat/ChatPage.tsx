@@ -33,6 +33,9 @@ function ChatPage() {
       socket.emit(getEventName("LEAVE_CHAT"), last.current);
       navigate(getAppRoutes("HOME"));
     }
+    return () => {
+      socket.emit(getEventName("LEAVE_CHAT"), username);
+    };
   }, [socket, username]);
 
   return (

@@ -4,7 +4,7 @@ import useAuth from "src/hooks/useAuth";
 import LoginUser from "./LoginUser/LoginUser";
 
 const loginUsersStyle = {
-  list: "flex flex-col gap-8 items-center mt-[4rem]",
+  list: "flex flex-col gap-8 items-center mt-[8rem]",
 };
 interface LoginUsersProps {
   loginUsers: string[];

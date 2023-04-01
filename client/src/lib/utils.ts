@@ -1,4 +1,5 @@
-import { GenericRecord } from "../types/types";
+/* eslint-disable no-promise-executor-return */
+import { AnyFun, GenericRecord } from "../types/types";
 
 export const classNameGenerator = (...classes: (string | undefined)[]) =>
   `${classes.filter((el) => el).join(" ")}`;
@@ -35,3 +36,10 @@ export const getLocalTimeDate = (
   });
 
 export const getDateFromStr = (date: string) => new Date(date);
+
+export const delayFun = (cb: AnyFun, delay: number) =>
+  new Promise((res) =>
+    setTimeout(async () => {
+      res(await cb());
+    }, delay)
+  );

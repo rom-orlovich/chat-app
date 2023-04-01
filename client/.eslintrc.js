@@ -6,7 +6,12 @@ module.exports = {
   },
 
   root: true,
-
+  overrides: [
+    {
+      files: ["*.ts", "*.tsx", "*.js"],
+      parser: "@typescript-eslint/parser",
+    },
+  ],
   settings: {
     "import/resolver": {
       node: {
@@ -15,7 +20,7 @@ module.exports = {
       },
     },
   },
-  extends: ["airbnb-base", "prettier"],
+  extends: ["airbnb-base", "prettier", "plugin:tailwindcss/recommended"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: "latest",

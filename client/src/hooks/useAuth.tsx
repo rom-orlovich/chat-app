@@ -11,7 +11,7 @@ import { getAppRoutes } from "../lib/appRoutes";
 
 function useAuth() {
   const { session: username, setSession } = useSessionContext();
-  const [reason, setReason] = useState<string>("");
+  const [error, setError] = useState<string>("");
   const navigate = useNavigate();
   // const handleLogin = (name: string) => {
   //   setSession(name);
@@ -29,11 +29,11 @@ function useAuth() {
 
     if (res === getActionCode("USER_LOGIN")) {
       setSession(username);
-      setReason("");
+      setError("");
       return navigate(getAppRoutes("CHAT"));
     }
 
-    setReason(getActionResponse(res as ActionCodeValue));
+    setError(getActionResponse(res as ActionCodeValue));
   };
   const last = useRef("");
 
@@ -42,12 +42,10 @@ function useAuth() {
     const res = await logout(last.current);
     if (String(res) === getActionCode("USER_LOGOUT")) {
       setSession("");
-      setReason("");
-
-      // return navigate(getAppRoutes("HOME"));
+      setError("");
     }
 
-    setReason(getActionResponse(res));
+    setError(getActionResponse(res));
   };
 
   return {
@@ -55,7 +53,7 @@ function useAuth() {
     handleLogin,
     handleLogout,
     setUsername: setSession,
-    reason,
+    error,
     last,
   };
 }

@@ -8,11 +8,11 @@ import {
 
 const messageStyle = {
   message:
-    "card min-w-[20%] max-w-[20vw] max-h-fit font-Roboto min-h-[2rem] flex flex-col p-2",
+    "card min-w-[14rem] max-w-fit max-h-fit font-Roboto min-h-[2rem] flex flex-col p-2",
   messageBg: "bg-white self-end",
   myMessageBg: "bg-myMsgBlock",
   systemBg:
-    "bg-sysMsgBlock !min-h-[2rem] !flex-row gap-2 justify-center max-w-fit items-center self-center",
+    "bg-sysMsgBlock !min-h-[2rem] xs:!flex-row gap-2 justify-center max-w-[14rem] items-center self-center",
   username: "text-base text-username px-1",
   content: "px-2",
   time: "text-sm self-end text-time  px-1",

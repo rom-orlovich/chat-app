@@ -25,7 +25,7 @@ export const ACTIONS_RESPONSE = {
     `The username ${username} has already exist`,
   [getActionCode("USERNAME_NOT_EXIST")]: (username: string) =>
     `The username ${username} is not exist.`,
-  [getActionCode("USERNAME_NOT_VALID")]: "The username is not valid.",
+  [getActionCode("USERNAME_NOT_VALID")]: "Please insert a valid username.",
 } as Record<ActionCodeValue, string | ((username: string) => string)>;
 
 export const getActionResponse = (code: keyof typeof ACTIONS_RESPONSE) =>

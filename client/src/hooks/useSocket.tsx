@@ -8,7 +8,7 @@ function useSocket() {
     setSocket(newSocket);
 
     return () => {
-      newSocket.disconnect();
+      // newSocket.disconnect();
     };
   }, []);
   return socket;

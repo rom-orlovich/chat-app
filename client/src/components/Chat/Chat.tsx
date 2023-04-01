@@ -8,7 +8,8 @@ import Messages from "./Messages/Messages";
 import ChatTextInput from "./ChatTextInput/ChatTextInput";
 
 const chatStyle = {
-  container: "flex flex-col justify-between ml-[12rem] p-6 max-w-[75%] h-full",
+  container:
+    "flex flex-col justify-between xs:ml-[12%] ml-[10%]  xs:p-6 p-4 pb-2 xs:max-w-[80%] h-full",
   inputMsg: "overflow-hidden text-base",
 };
 

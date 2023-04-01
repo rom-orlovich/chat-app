@@ -32,15 +32,6 @@ function useForm<T extends GenericRecord<any>, D = any>(initialState: T) {
     }));
   };
 
-  // function handleSetValue<V>(id: keyof T) {
-  //   return (value: V) => {
-  //     setFormValues((pre) => ({
-  //       ...pre,
-  //       [id]: value,
-  //     }));
-  //   };
-  // }
-
   /**
    * This function return the submit function that execute the callback function that provided to execute during the submit event.
    * During the submit event, the submit function handles the state of the submit event and return an appropriate response.
@@ -81,13 +72,17 @@ function useForm<T extends GenericRecord<any>, D = any>(initialState: T) {
 
   return {
     setFormValues,
-    // handleSetValue,
+
     onSubmit,
     onChange,
-    // onChange: useDebouncedCallback(onChange, 500),
+
     formValues,
     formState,
   };
 }
+
+export type ReturnTypeUseForm<T extends GenericRecord<any>, D> = ReturnType<
+  typeof useForm<T, D>
+>;
 
 export default useForm;

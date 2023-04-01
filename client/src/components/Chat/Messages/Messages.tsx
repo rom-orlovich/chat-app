@@ -11,7 +11,7 @@ import DayTag from "./DayTag/DayTag";
 import { checkIfTwoDatesAreInDifferentDays } from "../utils";
 
 const messagesStyle = {
-  messages: "flex flex-col gap-4 p-6",
+  messages: "flex flex-col gap-4 xs:p-8 xs:px-16",
 };
 function Messages({ messages }: { messages: MessageProps[] }) {
   const { username } = useAuth();
@@ -20,8 +20,8 @@ function Messages({ messages }: { messages: MessageProps[] }) {
   return (
     <Overflow
       active={messages.length > 5}
-      innerElementClass="min-h-[15rem] h-fit"
-      outerElementClass="h-[90%] mb-2rem"
+      innerElementClass="min-h-[15rem]"
+      outerElementClass="h-[90%] mb-2rem "
     >
       <ul className={messagesStyle.messages}>
         {messages.map((message, i) => {
@@ -45,8 +45,8 @@ function Messages({ messages }: { messages: MessageProps[] }) {
             />
           );
         })}
+        <div ref={lastMessage}></div>
       </ul>
-      <div ref={lastMessage}></div>
     </Overflow>
   );
 }

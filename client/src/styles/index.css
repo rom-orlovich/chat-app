@@ -18,7 +18,7 @@
 /*Scrollbar style*/
 /* width */
 ::-webkit-scrollbar {
-  width: 7.5px;
+  width: 5px;
 }
 
 /* Track */
@@ -37,4 +37,13 @@
 }
 .dashboard::-webkit-scrollbar {
   display: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
