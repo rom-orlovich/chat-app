@@ -1,5 +1,8 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 import Sidebar from "src/components/Sidebar.ts/Sidebar";
+import { getEventName } from "src/lib/events";
+import { useEffect } from "react";
+import { getAppRoutes } from "src/lib/appRoutes";
 import Chat from "../../components/Chat/Chat";
 
 import useAuth from "../../hooks/useAuth";
@@ -24,19 +27,19 @@ function ChatPage() {
   // Current login user data
   const { username, last } = useAuth();
 
-  // useEffect(() => {
-  //   // If there is valid login username emit join chat socket event.
-  //   if (username) socket.emit(getEventName("JOIN_CHAT"), username);
-  //   else {
-  //     // Otherwise navigate to home page.
-  //     socket.emit(getEventName("LEAVE_CHAT"), last.current);
-  //     navigate(getAppRoutes("HOME"));
-  //   }
-  //   return () => {
-  //     socket.emit(getEventName("LEAVE_CHAT"), username);
-  //   };
-  // }, [socket, username]);
-  useHandleRooms(socket);
+  useEffect(() => {
+    // If there is valid login username emit join chat socket event.
+    if (username) socket.emit(getEventName("JOIN_CHAT"), username);
+    else {
+      // Otherwise navigate to home page.
+      socket.emit(getEventName("LEAVE_CHAT"), last.current);
+      navigate(getAppRoutes("HOME"));
+    }
+    return () => {
+      socket.emit(getEventName("LEAVE_CHAT"), username);
+    };
+  }, [socket, username]);
+  // useHandleRooms(socket);
 
   return (
     <section className={chatPageStyle.pageContainer}>

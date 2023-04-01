@@ -1,6 +1,12 @@
+import axios from "axios";
 import { ActionCodeKey, getActionMessage } from "../../lib/actionsCodes";
 import { MessageToDB } from "../../mongoDB/handlers/messages";
 import { GLOBAL_CHAT_ID } from "./handlers";
+import {
+  SERVER_URL_API,
+  createURL,
+  getAppEndpoints,
+} from "../../lib/endpoints";
 
 export const createSysMessageObj = (
   action: ActionCodeKey,
@@ -17,4 +23,13 @@ export const createSysMessageObj = (
     createdAt: curDate,
   };
   return message;
+};
+
+export const createMessageByUsingAPI = async (message: MessageToDB) => {
+  const url = createURL(SERVER_URL_API, getAppEndpoints("MESSAGES"));
+  try {
+    const res = await axios.post(url, message);
+  } catch (error) {
+    console.log(error);
+  }
 };

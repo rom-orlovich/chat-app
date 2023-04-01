@@ -43,9 +43,10 @@ function useAuth() {
       alert(message);
       return setError(message);
     }
-    // Clean the current username, clean the error. The navigation to home page execute in useHandleRooms hook.
+    // Clean the current username, clean the error. The navigation to home page execute  and navigate to chat page.
     setSession("");
     setError("");
+    return navigate(getAppRoutes("HOME"));
   };
 
   return {
