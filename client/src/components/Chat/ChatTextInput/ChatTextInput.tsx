@@ -2,6 +2,9 @@ import React, { KeyboardEventHandler } from "react";
 
 import { BsSend } from "react-icons/bs";
 
+import { Socket } from "socket.io-client";
+import { getEventName } from "src/lib/events";
+import { useDebouncedCallback } from "use-debounce";
 import useForm from "../../../hooks/useForm";
 
 import InputLabel from "../../Inputs/InputLabel/InputLabel";
@@ -19,11 +22,16 @@ const chatTextInputStyle = {
     "absolute right-[2%] top-[20%] focus:bg-[#f0eaeaf0] flex justify-center items-center w-6 h-6 hover:bg-[#fffafaf0]",
   icon: "text-[#2e2d2df0] rounded-md",
 };
-function ChatTextInput() {
+function ChatTextInput({ socket }: { socket: Socket }) {
   const chatForm = useForm({ message: "" });
   const { message: messageValue } = chatForm.formValues;
+
   const { username } = useAuth();
+
+  // Get the ref for textArea height resizing.
   const ref = useAutoSizeTextArea(messageValue);
+
+  // Clean the chat's text input.
   const resetMessage = () => chatForm.setFormValues({ message: "" });
 
   // Generate create new message function.
@@ -36,10 +44,20 @@ function ChatTextInput() {
   // Submit and send new message.
   const handleChatSubmit = chatForm.onSubmit(createNewMessage);
 
+  const handleTyping = useDebouncedCallback(() => {
+    // Broadcast typing event for all the users.
+    socket.emit(getEventName("BROADCAST_TYPING"), username);
+  }, 200);
+
   const handleKeyDown: KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
+    handleTyping();
+    // For new line.
     if (e.key === "Enter" && e.shiftKey) return;
+
+    // For sending new message.
     if (e.key === "Enter") createNewMessage();
   };
+
   return (
     <div className={chatTextInputStyle.container}>
       <form className={chatTextInputStyle.form} onSubmit={handleChatSubmit}>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import { MessageProps } from "../../../../types/messages.types";
 import {
   classIsOn,
@@ -25,26 +25,41 @@ function Message({
   createdAt,
   myUsername,
 }: MessageProps & { myUsername: string }) {
+  // Check current sender message.
   const isMyMessage = username === myUsername;
   const isSystem = username === "system";
+
+  const createdAtDate = getLocalTimeDate(new Date(createdAt));
+
+  // Check the current message's style.
   const styleByMessageUsername = classIsOn(
     isSystem,
     messageStyle.systemBg, // System messages.
     curStyleMessage(isMyMessage) // Users message.
   );
-  const createdAtDate = getLocalTimeDate(new Date(createdAt));
-  return (
+
+  // The message item component.
+  const MessageItem = ({ children }: PropsWithChildren) => (
     <li
       className={classNameGenerator(
         messageStyle.message,
         styleByMessageUsername
       )}
     >
+      {children}
+    </li>
+  );
+
+  // Message content.
+  const messageContent = (
+    <>
       {!isSystem && <span className={messageStyle.username}>{username} </span>}
       <span className={messageStyle.content}> {content} </span>
       <span className={messageStyle.time}> {createdAtDate} </span>
-    </li>
+    </>
   );
+
+  return <MessageItem>{messageContent}</MessageItem>;
 }
 
 export default Message;

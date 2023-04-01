@@ -3,6 +3,9 @@ import { getDateFromStr } from "src/lib/utils";
 import { createMessage } from "../../lib/api/messagesAPI";
 import { MessageProps, MessageSent } from "../../types/messages.types";
 
+/**
+ * Create a function the create a message object to send to an message api and reset the chat's text field value.
+ */
 export const createNewMessageFun =
   (messageValue: string, username: string, resetMessage: () => void) =>
   async () => {
@@ -16,6 +19,9 @@ export const createNewMessageFun =
     resetMessage();
   };
 
+/**
+ * Check if the two different following dates are in different in their dates' days.
+ */
 export const checkIfTwoDatesAreInDifferentDays = (
   messages: MessageProps[],
   curIndex: number

@@ -1,4 +1,4 @@
-import { GLOBAL_CHAT_ID } from "../../socket/lib/handlers";
+import { GLOBAL_CHAT_ID } from "../../lib/constants";
 import { OmitKey } from "../../types/types";
 import { getCollection } from "../utils";
 

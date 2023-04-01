@@ -21,23 +21,45 @@ function Chat({
   curMessages: MessageProps[];
 }) {
   const [messages, setMessages] = useState<MessageProps[]>(curMessages);
+  const [typing, setTyping] = useState("");
 
   // Update the chat with real time messages.
   useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout>;
     const handleSetNewMessage = (data: MessageProps) =>
       setMessages((pre) => [...pre, data]);
 
+    // Handle user typing event.
+    const handleTyping = (data: string) => {
+      // Clear the timeout that currently on before the new timeout.
+      clearTimeout(timeout);
+
+      // Set the typing indicator's data.
+      setTyping(data);
+
+      // Set new timeout to clean the typing indicator.
+      timeout = setTimeout(() => {
+        setTyping("");
+      }, 500);
+    };
+
+    // Handle the broadcast of new messages.
     socket.on(getEventName("BROADCAST_NEW_MESSAGE"), handleSetNewMessage);
+
+    // Handle the broadcast of user typing.
+    socket.on(getEventName("BROADCAST_TYPING"), handleTyping);
     return () => {
+      // Trun off the socket's events handlers.
       socket.off(getEventName("BROADCAST_NEW_MESSAGE"), handleSetNewMessage);
+      socket.off(getEventName("BROADCAST_TYPING"), handleTyping);
     };
   }, [socket]);
 
   return (
     <section className={chatStyle.container}>
       <Messages messages={messages} />
-
-      <ChatTextInput />
+      {typing && <p>{typing}</p>}
+      <ChatTextInput socket={socket} />
     </section>
   );
 }

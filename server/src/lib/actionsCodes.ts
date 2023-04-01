@@ -7,6 +7,7 @@ export const ACTIONS_CODE = {
   USERNAME_EXIST: "3002",
   USERNAME_NOT_EXIST: "3003",
   USERNAME_NOT_VALID: "3004",
+  USER_TYPING: "4005",
 } as const;
 
 type ActionCode = typeof ACTIONS_CODE;
@@ -20,6 +21,8 @@ export const ACTION_MESSAGE = {
     `${username} joined the chat`,
   [getActionCode("USER_LOGOUT")]: (username: string) =>
     `${username} left the chat`,
+  [getActionCode("USER_TYPING")]: (username: string) =>
+    `${username} is currently typing`,
 };
 export const getActionMessage = (key: ActionCodeKey) =>
   ACTION_MESSAGE[getActionCode(key)];

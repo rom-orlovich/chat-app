@@ -8,6 +8,7 @@ export const EMIT_EVENTS = {
   BROADCAST_NEW_CHAT_JOINS: "1006",
   BROADCAST_CHAT_LEAVING: "1007",
   BROADCAST_CURRENT_LOGIN_USERS: "1008",
+  BROADCAST_TYPING: "1009",
 };
 
 export const getEventName = (key: keyof typeof EMIT_EVENTS) => EMIT_EVENTS[key];

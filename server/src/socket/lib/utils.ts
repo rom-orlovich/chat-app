@@ -1,30 +1,40 @@
 import axios from "axios";
 import { ActionCodeKey, getActionMessage } from "../../lib/actionsCodes";
 import { MessageToDB } from "../../mongoDB/handlers/messages";
-import { GLOBAL_CHAT_ID } from "./handlers";
+
 import {
   SERVER_URL_API,
   createURL,
   getAppEndpoints,
 } from "../../lib/endpoints";
+import { GLOBAL_CHAT_ID } from "../../lib/constants";
 
-export const createSysMessageObj = (
+/**
+ * Create system message object.
+ **/
+export const createSystemMessage = (
   action: ActionCodeKey,
-  username: string
+  username: string,
+  sender = "system"
 ) => {
-  // Insert message to db.
+  // Create system message object.
   const curDate = new Date();
   const messageID = String(curDate.getTime());
+
   const message: MessageToDB = {
     messageID,
     chatID: GLOBAL_CHAT_ID,
-    username: "system",
+    username: sender,
     content: getActionMessage(action)(username),
     createdAt: curDate,
   };
   return message;
 };
 
+/**
+ * Create message by the server api.
+ * Request POST - /api/messages
+ */
 export const createMessageByUsingAPI = async (message: MessageToDB) => {
   const url = createURL(SERVER_URL_API, getAppEndpoints("MESSAGES"));
   try {

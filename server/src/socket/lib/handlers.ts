@@ -5,10 +5,12 @@ import { getEventName } from "../../lib/events";
 
 import { MessageToDB } from "../../mongoDB/handlers/messages";
 import { getActionMessage } from "../../lib/actionsCodes";
-import { createMessageByUsingAPI, createSysMessageObj } from "./utils";
+import { createMessageByUsingAPI, createSystemMessage } from "./utils";
+import { GLOBAL_CHAT_ID } from "../../lib/constants";
 
-export const GLOBAL_CHAT_ID = "global_chat";
-
+/**
+ * Create socket event handlers.
+ */
 export const handlers = (
   io: Io,
   socket: Socket,
@@ -16,8 +18,12 @@ export const handlers = (
 ) => {
   const getLoginUsers = () => [...loginUsers.values()];
 
+  // Create access to global chat.
   const chat = io.to(GLOBAL_CHAT_ID);
 
+  /**
+   Handle user joining chat socket event.
+   **/
   const userJoinChatHandler = async (username: string) => {
     // Join the socket.
     try {
@@ -28,7 +34,7 @@ export const handlers = (
       loginUsers.set(socket.id, username);
 
       // Insert message to db.
-      const message: MessageToDB = createSysMessageObj("USER_LOGIN", username);
+      const message: MessageToDB = createSystemMessage("USER_LOGIN", username);
       await createMessageByUsingAPI(message);
 
       // Update the client about the current login users.
@@ -38,6 +44,9 @@ export const handlers = (
     }
   };
 
+  /**
+   * Handle user leaving chat socket event.
+   **/
   const userLeaveChatHandler = async () => {
     try {
       // Get the user's username.
@@ -55,7 +64,7 @@ export const handlers = (
       console.log(getActionMessage("USER_LOGOUT")(username));
 
       // Insert message to db.
-      const message: MessageToDB = createSysMessageObj("USER_LOGOUT", username);
+      const message: MessageToDB = createSystemMessage("USER_LOGOUT", username);
       await createMessageByUsingAPI(message);
 
       // Update the client about the current login users.
@@ -68,33 +77,24 @@ export const handlers = (
       console.log(error);
     }
   };
-  // const disconnectHandler = async () => {
-  //   try {
-  //     // Get the user's username.
-  //     const username = loginUsers.get(socket.id);
 
-  //     // Check if the user exist.
-  //     if (!username) return;
+  /**
+   * Handle user typing event.
+   **/
+  const userTypingHandler = async () => {
+    // Get the typing username.
+    const username = loginUsers.get(socket.id);
+    if (!username) return;
 
-  //     // Delete disconnect username.
-  //     loginUsers.delete(socket.id);
+    console.log(username);
 
-  //     // Leave socket.
-  //     await socket.leave(GLOBAL_CHAT_ID);
+    socket.broadcast
+      .to(GLOBAL_CHAT_ID)
+      .emit(
+        getEventName("BROADCAST_TYPING"),
+        getActionMessage("USER_TYPING")(username)
+      );
+  };
 
-  //     console.log(getActionMessage("USER_LOGOUT")(username));
-
-  //     // Insert message to db.
-  //     const message: MessageToDB = createSysMessageObj("USER_LOGOUT", username);
-  //     await createMessageByUsingAPI(message);
-
-  //     // Disconnect the socket.
-  //     socket.disconnect();
-  //     console.log(`The client:${socket.id} is disconnect`);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  return { userJoinChatHandler, userLeaveChatHandler };
+  return { userJoinChatHandler, userLeaveChatHandler, userTypingHandler };
 };

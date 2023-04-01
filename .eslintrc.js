@@ -10,7 +10,7 @@ module.exports = {
   settings: {
     "import/resolver": {
       node: {
-        paths: ["./server", "./client"],
+        paths: ["./server"],
         extensions: [".js", ".ts", ".d.ts", ".tsx"],
       },
     },

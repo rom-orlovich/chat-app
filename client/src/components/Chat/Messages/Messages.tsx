@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { MessageProps } from "src/types/messages.types";
 import useAuth from "src/hooks/useAuth";
@@ -15,6 +15,8 @@ const messagesStyle = {
 };
 function Messages({ messages }: { messages: MessageProps[] }) {
   const { username } = useAuth();
+
+  // Scroll to the last message in the chat.
   const lastMessage = useScrollDown(messages);
 
   return (
@@ -29,6 +31,7 @@ function Messages({ messages }: { messages: MessageProps[] }) {
             messages,
             i
           );
+          // Tag the represent the days that the messages were sent.
           if (areInDifferentDays)
             return (
               <DayTag
