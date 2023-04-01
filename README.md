@@ -41,11 +41,11 @@ This is a real-time chat application that allows users to chat with each other i
 
 ## Technologies:
 
-- **[React](https://reactjs.org/)**
-- **[TypeScript](https://www.typescriptlang.org/)**
-- **[Node.js](https://nodejs.org/en/)**
+- **[React](https://reactjs.org/)** - A JavaScript library for building user interfaces.
+- **[TypeScript](https://www.typescriptlang.org/)** - For type checking and improved developer productivity.
+- **[Node.js](https://nodejs.org/en/)** - For efficient and scalable development of the application's backend logic.
 - **[MongoDB](https://www.mongodb.com/)** - A NoSQL database that stores users' account data.
-- **[Docker](https://www.docker.com/)**
+- **[Docker](https://www.docker.com/)** - Containerize the app and deploy into Digtal Ocean cloud.
 
 ## Packages:
 
