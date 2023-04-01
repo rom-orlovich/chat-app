@@ -12,7 +12,9 @@ function SessionContext(props: PropsWithChildren) {
 
   return <context.Provider value={state}>{props.children}</context.Provider>;
 }
-
+/**
+ * Provide the user's session state.
+ */
 export function useSessionContext() {
   return useContext(context);
 }

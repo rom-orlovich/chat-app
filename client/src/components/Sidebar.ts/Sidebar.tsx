@@ -33,7 +33,7 @@ function Sidebar({ socket }: { socket: Socket }) {
     const handleSetLoginUsers = (data: string[]) => {
       setLoginUsers(data);
     };
-
+    // Handle the status of current login users.
     socket.on(
       getEventCode("BROADCAST_CURRENT_LOGIN_USERS"),
       handleSetLoginUsers

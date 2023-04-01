@@ -26,6 +26,7 @@ function SidebarItemContent({
   isOFFcontainerStyle,
   isONcontainerStyle,
 }: SidebarItemContentProps) {
+  // The content of the sidebar item one the sideBar is open.
   const isOnContent = (
     <div
       className={classNameGenerator(
@@ -37,6 +38,8 @@ function SidebarItemContent({
       {text}
     </div>
   );
+
+  // The content of the sidebar item one the sideBar is close.
   const isOffContent = icon ? (
     <div
       className={classNameGenerator(

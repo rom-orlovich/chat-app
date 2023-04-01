@@ -32,7 +32,7 @@ function LoginForm() {
         <span> Join Chat </span> <BsFillChatDotsFill />
       </button>
 
-      {isError && <p className={formStyle.messageError}>* {error}</p>}
+      {isError && <p className={formStyle.messageError}>*{error}</p>}
     </form>
   );
 }
