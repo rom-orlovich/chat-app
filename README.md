@@ -1,5 +1,6 @@
 # Chat App:
-
+- [App's Architecture Overview](https://drive.google.com/file/d/1H6pV3lnnpqHT1Szd8eSQT_KZcr7ehqsM/view?usp=sharing):point_left: 
+- [App's Main Flows Overview](https://drive.google.com/file/d/1fMVXYmP4Dh8UW7usYuhFsoJhtuvqEMII/view?usp=share_link):point_left:
 ## About My Project:
 
 Chat App Assignment is developed as a home assignment for a Full-Stack position at Yad2. \
@@ -21,16 +22,10 @@ With its user-friendly interface and responsive design, this chat app provides u
 - [**Images**](#images)
 
 ## App's Architecture:
-
-[<img alt="App's Architecture" src="./readme-media/thumbnail-video-architecture.png"  height="500" width="800">](https://drive.google.com/file/d/1bygpvKTmhhHgYXYmw4ZMl-zg9ezm4ApM/view?usp=sharing "App's Architecture, click me!")
-
-   <!-- <img alt="App's Architecture" src="./readme-media/chat-app-architecture.png" width="700" hight="700"> -->
+<img alt="App's Architecture" src="./readme-media/chat-app-architecture.png" width="700" hight="700"> 
 
 ## Main Flows:
-
-<!-- [<img alt="App's Architecture" src="./readme-media/thumbnail-video.png"  height="500" width="800">](https://drive.google.com/file/d/1H6pV3lnnpqHT1Szd8eSQT_KZcr7ehqsM/view?usp=sharing "App's Architecture, click me!") -->
-
-   <img alt="Main Flows" src="./readme-media/chat-app-main-flows.png" width="700" hight="700">
+ <img alt="Main Flows" src="./readme-media/chat-app-main-flows.png" width="700" hight="700">
 
 ## Main Features:
 
