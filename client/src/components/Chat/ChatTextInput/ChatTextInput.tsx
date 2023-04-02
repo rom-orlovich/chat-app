@@ -41,8 +41,12 @@ function ChatTextInput({ socket }: { socket: Socket }) {
     resetMessage
   );
 
+  const sendMessage = () => {
+    socket.emit(getEventCode("SEND_MESSAGE"), createNewMessage());
+  };
+
   // Submit and send new message.
-  const handleChatSubmit = chatForm.onSubmit(createNewMessage);
+  const handleChatSubmit = chatForm.onSubmit(sendMessage);
 
   const handleTyping = useDebouncedCallback(() => {
     // Broadcast typing event for all the users.
@@ -55,7 +59,7 @@ function ChatTextInput({ socket }: { socket: Socket }) {
     if (e.key === "Enter" && e.shiftKey) return;
 
     // For sending new message.
-    if (e.key === "Enter") createNewMessage();
+    if (e.key === "Enter") sendMessage();
   };
 
   return (

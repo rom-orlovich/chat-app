@@ -2,13 +2,11 @@ import { RequestHandler } from "express";
 import { Io } from "../../types/express";
 
 /**
- * Extends the express's request object with io instance and loginUsers map.
+ * Extends the express's request object with loginUsers map.
  */
 export const getRequestExtendMiddleware: (
-  io: Io,
   loginUsers: Map<string, string>
-) => RequestHandler = (io, loginUsers) => (req, res, next) => {
-  req.io = io;
+) => RequestHandler = (loginUsers) => (req, res, next) => {
   req.loginUsers = loginUsers;
   next();
 };

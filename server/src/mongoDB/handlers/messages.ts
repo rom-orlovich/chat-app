@@ -1,5 +1,5 @@
 import { GLOBAL_CHAT_ID } from "../../lib/constants";
-import { OmitKey } from "../../types/types";
+import { OmitKey, PickKey } from "../../types/types";
 import { getCollection } from "../utils";
 
 export interface MessageFromDB {
@@ -11,6 +11,13 @@ export interface MessageFromDB {
 }
 
 export type MessageToDB = OmitKey<MessageFromDB, "createdAt"> & {
+  createdAt: Date;
+};
+
+export type MessageEmitted = PickKey<
+  MessageFromDB,
+  "content" | "username" | "messageID"
+> & {
   createdAt: Date;
 };
 

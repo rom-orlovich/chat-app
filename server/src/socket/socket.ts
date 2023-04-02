@@ -15,11 +15,17 @@ export const socketHandlers = (
     console.log("Client connect", socket.id);
 
     // Get the handlers function for the socket's events.
-    const { userJoinChatHandler, userLeaveChatHandler, userTypingHandler } =
-      handlers(io, socket, loginUsers);
+    const {
+      userJoinChatHandler,
+      userLeaveChatHandler,
+      userTypingHandler,
+      sendingMessageHandler,
+    } = handlers(io, socket, loginUsers);
 
     // Handler for join chat event.
     socket.on(getEventCode("JOIN_CHAT"), userJoinChatHandler);
+    // Handler for join chat event.
+    socket.on(getEventCode("SEND_MESSAGE"), sendingMessageHandler);
 
     // Handler for user's typing event.
     socket.on(getEventCode("BROADCAST_TYPING"), userTypingHandler);

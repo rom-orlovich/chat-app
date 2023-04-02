@@ -8,6 +8,9 @@ export interface MessageProps {
   createdAt: string;
 }
 
-export type MessageSent = PickKey<MessageProps, "content" | "username"> & {
+export type MessageEmitted = PickKey<
+  MessageProps,
+  "content" | "username" | "messageID"
+> & {
   createdAt: Date;
 };

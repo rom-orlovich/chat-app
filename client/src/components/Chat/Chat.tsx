@@ -51,7 +51,7 @@ function Chat({
     socket.on(getEventCode("BROADCAST_TYPING"), handleTyping);
 
     return () => {
-      // Trun off the socket's events handlers.
+      // Turn off the socket's events handlers.
       socket.off(getEventCode("BROADCAST_NEW_MESSAGE"), handleSetNewMessage);
       socket.off(getEventCode("BROADCAST_TYPING"), handleTyping);
     };

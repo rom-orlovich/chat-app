@@ -3,7 +3,7 @@ import { Socket } from "socket.io";
 import { Io } from "../../types/express";
 import { getEventCode } from "../../lib/events";
 
-import { MessageToDB } from "../../mongoDB/handlers/messages";
+import { MessageEmitted, MessageToDB } from "../../mongoDB/handlers/messages";
 import { getActionMessage } from "../../lib/actionsCodes";
 import { createMessageByUsingAPI, createSystemMessage } from "./utils";
 import { GLOBAL_CHAT_ID } from "../../lib/constants";
@@ -37,6 +37,9 @@ export const handlers = (
       const message: MessageToDB = createSystemMessage("USER_LOGIN", username);
       await createMessageByUsingAPI(message);
 
+      // Broadcast that message to sockets clients.
+      chat.emit(getEventCode("BROADCAST_NEW_MESSAGE"), message);
+
       // Update the client about the current login users.
       chat.emit(getEventCode("BROADCAST_CURRENT_LOGIN_USERS"), getLoginUsers());
     } catch (error) {
@@ -45,34 +48,20 @@ export const handlers = (
   };
 
   /**
-   * Handle user leaving chat socket event.
+   Handle user joining chat socket event.
    **/
-  const userLeaveChatHandler = async () => {
+  const sendingMessageHandler = async (message: MessageEmitted) => {
+    // Get the user's username.
+    const username = loginUsers.get(socket.id);
+
+    // Check if the user exist.
+    if (!username) return;
     try {
-      // Get the user's username.
-      const username = loginUsers.get(socket.id);
-
-      // Check if the user exist.
-      if (!username) return;
-
-      // Delete the login user.
-      loginUsers.delete(socket.id);
-
-      // Leave socket.
-      await socket.leave(GLOBAL_CHAT_ID);
-
-      console.log(getActionMessage("USER_LOGOUT")(username));
-
       // Insert message to db.
-      const message: MessageToDB = createSystemMessage("USER_LOGOUT", username);
       await createMessageByUsingAPI(message);
 
-      // Update the client about the current login users.
-      chat.emit(getEventCode("BROADCAST_CURRENT_LOGIN_USERS"), getLoginUsers());
-
-      // Disconnect the socket.
-      socket.disconnect();
-      console.log(`The client:${socket.id} is disconnect`);
+      // Broadcast that message to sockets clients.
+      chat.emit(getEventCode("BROADCAST_NEW_MESSAGE"), message);
     } catch (error) {
       console.log(error);
     }
@@ -94,5 +83,46 @@ export const handlers = (
       );
   };
 
-  return { userJoinChatHandler, userLeaveChatHandler, userTypingHandler };
+  /**
+   * Handle user leaving chat socket event.
+   **/
+  const userLeaveChatHandler = async () => {
+    try {
+      // Get the user's username.
+      const username = loginUsers.get(socket.id);
+
+      // Check if the user exist.
+      if (!username) return;
+
+      // Delete the login user.
+      loginUsers.delete(socket.id);
+
+      // Leave socket.
+      await socket.leave(GLOBAL_CHAT_ID);
+      console.log(getActionMessage("USER_LOGOUT")(username));
+
+      // Insert message to db.
+      const message: MessageToDB = createSystemMessage("USER_LOGOUT", username);
+      await createMessageByUsingAPI(message);
+
+      // Broadcast that message to sockets clients.
+      chat.emit(getEventCode("BROADCAST_NEW_MESSAGE"), message);
+
+      // Update the client about the current login users.
+      chat.emit(getEventCode("BROADCAST_CURRENT_LOGIN_USERS"), getLoginUsers());
+
+      // Disconnect the socket.
+      socket.disconnect();
+      console.log(`The client:${socket.id} is disconnect`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return {
+    userJoinChatHandler,
+    userLeaveChatHandler,
+    userTypingHandler,
+    sendingMessageHandler,
+  };
 };

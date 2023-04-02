@@ -1,22 +1,24 @@
 import { getDateFromStr } from "src/lib/utils";
 
-import { createMessage } from "../../lib/api/messagesAPI";
-import { MessageProps, MessageSent } from "../../types/messages.types";
+import { MessageProps, MessageEmitted } from "../../types/messages.types";
 
 /**
- * Create a function the create a message object to send to an message api and reset the chat's text field value.
+ * Create a function the create a message object and reset the chat's text field value.
  */
 export const createNewMessageFun =
-  (messageValue: string, username: string, resetMessage: () => void) =>
-  async () => {
+  (messageValue: string, username: string, resetMessage: () => void) => () => {
     if (!messageValue) return;
-    const message: MessageSent = {
+    const date = new Date();
+
+    const message: MessageEmitted = {
+      messageID: String(date.getTime()),
       content: messageValue,
       username,
-      createdAt: new Date(),
+      createdAt: date,
     };
-    await createMessage(message);
+
     resetMessage();
+    return message;
   };
 
 /**

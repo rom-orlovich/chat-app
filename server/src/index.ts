@@ -40,7 +40,7 @@ const startServer = async () => {
     socketHandlers(io, loginUsers);
 
     // Get the ExtendedMiddleware
-    const requestExtendMiddleware = getRequestExtendMiddleware(io, loginUsers);
+    const requestExtendMiddleware = getRequestExtendMiddleware(loginUsers);
 
     // API handlers
     app.use(getAppEndpoints("API_PREFIX"), requestExtendMiddleware, apiRoutes);
