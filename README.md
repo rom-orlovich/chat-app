@@ -6,9 +6,7 @@ Chat App Assignment is developed as a home assignment for a Full-Stack position 
 This real-time chat application allows users to chat with each other in real time, view the global chat's messages, and see the user currently logged in. \
 With its user-friendly interface and responsive design, this chat app provides users with a seamless and enjoyable experience.
 
-
 https://user-images.githubusercontent.com/87934536/229322850-b4c10500-1116-4746-a06b-74b239586137.mp4
-
 
 # Table of contents
 
@@ -31,16 +29,16 @@ https://user-images.githubusercontent.com/87934536/229322850-b4c10500-1116-4746-
 
 ## Main Features:
 
- 1. **Live Chat** - The Chat App allows users to engage in a real-time chat conversation with their friends who are currently logged in to the app.
+1.  **Live Chat** - The Chat App allows users to engage in a real-time chat conversation with their friends who are currently logged in to the app.
 
- 2. **Users currently logged In List** - The app displays a list of all the users currently logged in to the app. \
-  Users can see who has joined the chat and who has left.
+2.  **Users currently logged In List** - The app displays a list of all the users currently logged in to the app. \
+    Users can see who has joined the chat and who has left.
 
- 3. **History Of Messages** - Users can view the history of chat messages sent in the chat room and the time each message was sent. \
-   If two or more messages were sent on different days, the app would automatically insert a divider with the date each message was sent.
+3.  **History Of Messages** - Users can view the history of chat messages sent in the chat room and the time each message was sent. \
+    If two or more messages were sent on different days, the app would automatically insert a divider with the date each message was sent.
 
- 4. **Typing Indicator** - Users can see who is typing a message in the chat room. \
-  This feature helps let users know that someone is about to send a message and to wait for it.
+4.  **Typing Indicator** - Users can see who is typing a message in the chat room. \
+    This feature helps let users know that someone is about to send a message and to wait for it.
 
 ## Technologies:
 
@@ -78,19 +76,26 @@ https://user-images.githubusercontent.com/87934536/229322850-b4c10500-1116-4746-
 ## Running Docker:
 
 1. **Clone the repo**
+
    ```
    git clone git@github.com:rom-orlovich/jobs-agent-backend.git
    ```
-   
-2. **Create .env files in the root of the client and server folders.**
-   
-3. **Run command**
+
+2. **Install all the dependencies**
+
+```
+npm run init-p
+```
+
+3. **Create .env files in the root of the client and server folders.**
+
+4. **Run command**
 
    ```
    docker compose up -d
    ```
 
-3. **Go to http://localhost:3000 and have fun**!
+5. **Go to http://localhost:3000 and have fun**!
 
 ## What's Next:
 

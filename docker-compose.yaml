@@ -8,11 +8,16 @@ services:
       - "27017:27017"
     volumes:
       - "mongodb_db:/data/db"
+    healthcheck:
+      test: [ "CMD", "nc", "-z", "localhost", "27017" ]
+      interval: 5s
+      timeout: 10s
+      retries: 3
 
 
   # MongoDB dashboard service
   mongo-express:
-    restart: always
+  
     image: mongo-express
     environment:
       - ME_CONFIG_BASICAUTH_USERNAME=admin
@@ -21,8 +26,10 @@ services:
       - "8081:8081"
     volumes:
       - "mongodb_db:/data/db"
+    restart: on-failure
     depends_on:
-      - mongo
+        rabbitmq:
+           condition: service_healthy
   
 
  # Node.js&Express server service
