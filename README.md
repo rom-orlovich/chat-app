@@ -81,7 +81,10 @@ https://user-images.githubusercontent.com/87934536/229322850-b4c10500-1116-4746-
    ```
    git clone git@github.com:rom-orlovich/jobs-agent-backend.git
    ```
-2. **Run command**
+   
+2. **Create .env files in the root of the client and server folders.**
+   
+3. **Run command**
 
    ```
    docker compose up -d
