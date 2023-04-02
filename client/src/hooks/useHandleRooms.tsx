@@ -4,6 +4,9 @@ import { Socket } from "socket.io-client";
 import { getEventCode } from "src/lib/events";
 import useAuth from "./useAuth";
 
+/**
+ *Handle the user's activity of joining and leaving the chat rooms.
+ */
 function useHandleRooms(socket: Socket) {
   // Current login user data
   const { username } = useAuth();
