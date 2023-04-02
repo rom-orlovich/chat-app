@@ -3,6 +3,7 @@ import Sidebar from "src/components/Sidebar.ts/Sidebar";
 import { getEventCode } from "src/lib/events";
 import { useEffect } from "react";
 import { getAppRoutes } from "src/lib/appRoutes";
+import useHandleRooms from "src/hooks/useHandleRooms";
 import Chat from "../../components/Chat/Chat";
 
 import useAuth from "../../hooks/useAuth";
@@ -21,23 +22,9 @@ function ChatPage() {
 
   // Connect to socket.
   const socket = useSocket();
-  const navigate = useNavigate();
 
   // Current login user data
-  const { username } = useAuth();
-
-  useEffect(() => {
-    // If there is valid login username emit join chat socket event.
-    if (username) socket.emit(getEventCode("JOIN_CHAT"), username);
-    else {
-      // Otherwise navigate to home page.
-      socket.emit(getEventCode("LEAVE_CHAT"));
-      navigate(getAppRoutes("HOME"));
-    }
-    return () => {
-      socket.emit(getEventCode("LEAVE_CHAT"), username);
-    };
-  }, [socket, username]);
+  useHandleRooms(socket);
 
   return (
     <section className={chatPageStyle.pageContainer}>

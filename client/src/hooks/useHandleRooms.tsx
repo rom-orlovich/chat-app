@@ -22,6 +22,10 @@ function useHandleRooms(socket: Socket) {
     // If there is valid login username emit join chat socket event.
     if (username) joinRoom();
     else leaveRoom();
+
+    return () => {
+      leaveRoom();
+    };
   }, [username, socket]);
 }
 
