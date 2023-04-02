@@ -12,6 +12,9 @@ import { getAppRoutes } from "../lib/appRoutes";
 function ProtectedRoute() {
   const { session } = useSessionContext();
   const navigate = useNavigate();
+
+  // If it does navigate to the chat page.
+  // Otherwise navigate to the home page.
   useEffect(() => {
     if (session) navigate(getAppRoutes("CHAT"), { replace: true });
     else navigate(getAppRoutes("HOME"), { replace: true });
