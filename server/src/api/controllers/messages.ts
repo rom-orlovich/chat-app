@@ -32,11 +32,11 @@ export const createMessage: RequestHandler = async (req, res) => {
   // Create the message in the mongoDB.
   const result = await createMessageInDB(message);
 
-  // Check if the message was inserted successfuly.
+  // Check if the message was inserted successfully.
   if (!result)
     return res.status(400).send(getActionCode("MESSAGE_NOT_CREATED"));
 
-  // Brodcast that message to sockets clients.
+  // Broadcast that message to sockets clients.
   io.to(GLOBAL_CHAT_ID).emit(getEventCode("BROADCAST_NEW_MESSAGE"), message);
 
   // Response a proper message.

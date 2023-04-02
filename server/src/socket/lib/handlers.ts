@@ -86,8 +86,6 @@ export const handlers = (
     const username = loginUsers.get(socket.id);
     if (!username) return;
 
-    console.log(username);
-
     socket.broadcast
       .to(GLOBAL_CHAT_ID)
       .emit(

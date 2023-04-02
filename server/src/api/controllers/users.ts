@@ -22,7 +22,7 @@ export const loginUser: RequestHandler = (req, res) => {
 
   // Check if user has already login.
   if (getUsername(username, req.loginUsers))
-    return res.status(400).send(getActionCode("USERNAME_EXIST"));
+    return res.status(403).send(getActionCode("USERNAME_EXIST"));
 
   // Response a proper message.
   return res.status(201).send(String(getActionCode("USER_LOGIN")));

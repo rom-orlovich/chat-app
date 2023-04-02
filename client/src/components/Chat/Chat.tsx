@@ -49,6 +49,7 @@ function Chat({
 
     // Handle the broadcast of user typing.
     socket.on(getEventCode("BROADCAST_TYPING"), handleTyping);
+
     return () => {
       // Trun off the socket's events handlers.
       socket.off(getEventCode("BROADCAST_NEW_MESSAGE"), handleSetNewMessage);
