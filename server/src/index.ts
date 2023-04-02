@@ -12,8 +12,7 @@ import { getAppEndpoints } from "./lib/endpoints";
 import { client } from "./mongoDB/utils";
 import { socketHandlers } from "./socket/socket";
 import { getRequestExtendMiddleware } from "./api/middleware/middleware";
-import { messageRoutes } from "./api/routes/messages";
-import { usersRoutes } from "./api/routes/users";
+
 import { apiRoutes } from "./api/api";
 
 const PORT = process.env.PORT || 5000;
@@ -45,22 +44,6 @@ const startServer = async () => {
 
     // Api handlers
     app.use(getAppEndpoints("API_PREFIX"), requestExtendMiddleware, apiRoutes);
-
-    // const api = app.router;
-
-    // // Message Routes.
-    // app.use(
-    //   getAppEndpoints("API_PREFIX"),
-    //   requestExtendMiddleware,
-    //   messageRoutes
-    // );
-
-    // // Users Routes.
-    // app.use(
-    //   getAppEndpoints("API_PREFIX"),
-    //   requestExtendMiddleware,
-    //   usersRoutes
-    // );
 
     server.listen(PORT, () => {
       console.log(`listening to port ${PORT}`);
