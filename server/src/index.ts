@@ -42,7 +42,7 @@ const startServer = async () => {
     // Get the ExtendedMiddleware
     const requestExtendMiddleware = getRequestExtendMiddleware(io, loginUsers);
 
-    // Api handlers
+    // API handlers
     app.use(getAppEndpoints("API_PREFIX"), requestExtendMiddleware, apiRoutes);
 
     server.listen(PORT, () => {

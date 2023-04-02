@@ -25,7 +25,7 @@ services:
       - mongo
   
 
- # Node.js&Express server service
+ # Node.js & Express server service
   server:
     build: './server'
     container_name: server
