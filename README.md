@@ -78,7 +78,7 @@ https://user-images.githubusercontent.com/87934536/229322850-b4c10500-1116-4746-
 1. **Clone the repo**
 
    ```
-   git clone git@github.com:rom-orlovich/jobs-agent-backend.git
+   git clone https://github.com/rom-orlovich/chat-app.git
    ```
 
 2. **Install all the dependencies**
