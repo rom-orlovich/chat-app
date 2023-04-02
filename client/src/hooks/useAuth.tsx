@@ -1,3 +1,5 @@
+/* eslint-disable no-alert */
+/* eslint-disable @typescript-eslint/no-shadow */
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAppRoutes } from "src/lib/appRoutes";

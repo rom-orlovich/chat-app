@@ -11,7 +11,7 @@ function useStateSession({ id, value }: { id: string; value: string }) {
 
   // Each time the component unmount, save the values in the browser's session.
   useEffect(() => {
-    window.sessionStorage.setItem(id, session as string);
+    window.sessionStorage.setItem(id, session);
   }, [session, id]);
 
   return { session, setSession } as const;
