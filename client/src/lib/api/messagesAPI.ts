@@ -16,12 +16,3 @@ export const getMessages = async () => {
   const data = await messagesAPI.get<MessageProps[]>("");
   return data.data;
 };
-// export const createMessage = async (message: MessageEmitted) => {
-//   try {
-//     const data = await messagesAPI.post<string>("", message);
-//     return data;
-//   } catch (error) {
-//     console.log(error);
-//     return getActionMessage("MESSAGE_NOT_CREATED");
-//   }
-// };

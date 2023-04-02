@@ -24,18 +24,3 @@ export const login = async (username: string) => {
     return err.response?.data as ActionCodeValue;
   }
 };
-
-export const logout = async (username: string) => {
-  try {
-    const result = await messagesAPI.get<ActionCodeValue>(
-      getAppEndpoints("LOGOUT"),
-      {
-        params: paramsURL({ username }),
-      }
-    );
-    return result.data;
-  } catch (error) {
-    const err = error as AxiosError;
-    return err.response?.data as ActionCodeValue;
-  }
-};

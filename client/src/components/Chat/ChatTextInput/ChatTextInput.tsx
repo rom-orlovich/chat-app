@@ -42,7 +42,8 @@ function ChatTextInput({ socket }: { socket: Socket }) {
   );
 
   const sendMessage = () => {
-    socket.emit(getEventCode("SEND_MESSAGE"), createNewMessage());
+    const message = createNewMessage();
+    if (message) socket.emit(getEventCode("SEND_MESSAGE"), message);
   };
 
   // Submit and send new message.
@@ -59,7 +60,11 @@ function ChatTextInput({ socket }: { socket: Socket }) {
     if (e.key === "Enter" && e.shiftKey) return;
 
     // For sending new message.
-    if (e.key === "Enter") sendMessage();
+    if (e.key === "Enter") {
+      // For preventing new line when submit a new message.
+      e.preventDefault();
+      sendMessage();
+    }
   };
 
   return (
