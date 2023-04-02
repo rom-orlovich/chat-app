@@ -24,7 +24,8 @@ export const socketHandlers = (
 
     // Handler for join chat event.
     socket.on(getEventCode("JOIN_CHAT"), userJoinChatHandler);
-    // Handler for join chat event.
+
+    // Handler for send message event.
     socket.on(getEventCode("SEND_MESSAGE"), sendingMessageHandler);
 
     // Handler for user's typing event.

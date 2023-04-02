@@ -22,9 +22,13 @@ With its user-friendly interface and responsive design, this chat app provides u
 
 ## App's Architecture:
 
-   <img alt="App's Architecture" src="./readme-media/chat-app-architecture.png" width="700" hight="700">
+[<img alt="App's Architecture" src="./readme-media/thumbnail-video-architecture.png"  height="500" width="800">](https://drive.google.com/file/d/1bygpvKTmhhHgYXYmw4ZMl-zg9ezm4ApM/view?usp=sharing "App's Architecture, click me!")
+
+   <!-- <img alt="App's Architecture" src="./readme-media/chat-app-architecture.png" width="700" hight="700"> -->
 
 ## Main Flows:
+
+<!-- [<img alt="App's Architecture" src="./readme-media/thumbnail-video.png"  height="500" width="800">](https://drive.google.com/file/d/1H6pV3lnnpqHT1Szd8eSQT_KZcr7ehqsM/view?usp=sharing "App's Architecture, click me!") -->
 
    <img alt="Main Flows" src="./readme-media/chat-app-main-flows.png" width="700" hight="700">
 
@@ -106,6 +110,10 @@ npm run init-p
 - Add a filter messages and user data system to the application to allow users to search for specific messages or users.
 
 ## Images:
+
+<!-- ### App's Architecture
+
+   <img alt="App's Architecture" src="./readme-media/chat-app-architecture.png" width="700" hight="700"> -->
 
 ### Home
 
