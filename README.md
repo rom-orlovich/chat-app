@@ -9,10 +9,9 @@ Chat App Assignment is developed as a home assignment for a Full-Stack position 
 This real-time chat application allows users to chat with each other in real time, view the global chat's messages, and see the user currently logged in. \
 With its user-friendly interface and responsive design, this chat app provides users with a seamless and enjoyable experience.
 
-<!-- <video src="https://user-images.githubusercontent.com/87934536/229322850-b4c10500-1116-4746-a06b-74b239586137.mp4" controls="controls" style="max-width: 730px;">
-</video> -->
+
 <p align="center">
-<img style='margin:0 50%;' alt="Chat App" src="./readme-media/chat_app.gif"  height="800" width="800"></p>
+<img style='' alt="Chat App" src="./readme-media/chat_app.gif"  height="600" width="600"></p>
 
 # Table of contents
 
