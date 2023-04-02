@@ -22,11 +22,11 @@ With its user-friendly interface and responsive design, this chat app provides u
 
 ## App's Architecture:
 
-   <img alt="User Profile" src="./readme-media/chat-app-architecture.png" width="700" hight="700">
+   <img alt="App's Architecture" src="./readme-media/chat-app-architecture.png" width="700" hight="700">
 
 ## Main Flows:
 
-   <img alt="User Profile" src="./readme-media/chat-app-main-flows.png" width="700" hight="700">
+   <img alt="Main Flows" src="./readme-media/chat-app-main-flows.png" width="700" hight="700">
 
 ## Main Features:
 
