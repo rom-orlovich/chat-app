@@ -88,9 +88,9 @@ With its user-friendly interface and responsive design, this chat app provides u
 
 2. **Install all the dependencies**
 
-```
-npm run init-p
-```
+   ```
+   npm run init-p
+   ```
 
 3. **Create .env files in the root of the client and server folders.**
 
